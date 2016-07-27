@@ -3,8 +3,33 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
 		</script>
 		<script src="js/jogo.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
 	</head>
 	<body>
-	<h1>M&aacute;quinas Agr&iacute;colas</h1>
+	<h1>Nakajo</h1>
+		<div class="image">
+			<img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png"/>
+		</div> 
+		<div class="image1" style="left: 1000px">
+			<img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png"/>
+		</div> 
 	</body>
+
+	<script>
+		top = $('.image img').position().top;
+		left = $('.image img').position().left
+
+
+
+    	nakajo1 = new ElasticBody($('.image'), left, 0.1, 50, 50);
+    //	nakajo2 = new ElasticBody($('.image'), left, 10, 50, 50);
+
+    	delta = 1.0/60.0 * 1000;
+    	setInterval(
+    		function() {
+    			nakajo1.move(delta);
+    			nakajo1.updateUI();
+			}, delta);
+	</script>
 </html>

@@ -4,21 +4,20 @@ class ElasticBody {
 	//@TODO massa
 
 
-	constructor(initialPosition, inicialSpeed, width, height) {
-		this.x = initialPosition;
-		this.y = inicialSpeed;
+	constructor(div, initialPosition, initialSpeed, width, height) {
+		this.x = initialPosition
+		this.speed = initialSpeed;
 		this.width = width;
 		this.height = height;
+		this.div = div;
 	}
 
 	move(delta) {
-		this.x += this.speed.x * delta;
-		this.y += this.speed.y * delta;
+		this.x += this.speed * delta;
 	}
 
 	updateUI () {
-		this.div.css('bottom') = this.y; 
-		this.div.css('left') = this.x;
+		this.div.css({'left':this.x});
 	}	
 }
 
@@ -26,6 +25,7 @@ class Collision {
 
 
 	/*Retorna true se estão em contato */
+
 	static contact (elasticBody1, elasticBody2) {
 		//@TODO
 		return true;
@@ -47,7 +47,3 @@ divBattle = [
 	elasticBody3,
 	elasticBody4,
 ]; 
-
-divBattle.forEach(function (elasticBody) {
-	alert(elasticBody.x);
-});
