@@ -25,11 +25,15 @@
     	nakajo1 = new ElasticBody($('.image'), left, 0.1, 50, 50);
     //	nakajo2 = new ElasticBody($('.image'), left, 10, 50, 50);
 
-    	delta = 1.0/60.0 * 1000;
+		delta = 1.0/60 * 1000;
+		var t = Date.now() - delta;
+    
     	setInterval(
     		function() {
+		    	delta = Date.now() - t;
     			nakajo1.move(delta);
     			nakajo1.updateUI();
+    			t = Date.now();
 			}, delta);
 	</script>
 </html>
