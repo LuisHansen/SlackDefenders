@@ -1,9 +1,5 @@
 class ElasticBody {
 
-	//@TODO Dimensões - Supor divs retangulares
-	//@TODO massa
-
-
 	constructor(div, initialPosition, initialSpeed, width, height, mass) {
 		this.div = div;
 		this.x = initialPosition

@@ -22,23 +22,32 @@
 
 		left1 = $('.image1').position().left
 
-    	nakajo1 = new ElasticBody($('.image'), left, 0.1, 50, 50, 10);
-    	nakajo2 = new ElasticBody($('.image1'), left1, -0.05, 50, 50, 10);
+    	nakajo1 = new ElasticBody($('.image'), left, 0.2, 50, 50, 10);
+    	nakajo2 = new ElasticBody($('.image1'), left1, 0.05, 50, 50, 10);
 
-		delta = 1.0/200 * 1000;
+
+    	elasticBodies = [
+    		nakajo1,
+    		nakajo2
+		];
+
+		delta = 1.0/60 * 1000;
 		var t = Date.now() - delta;
     	
     	setInterval(
     		function() {
-    			if(nakajo1.contact(nakajo2)){
-    				nakajo1.collide(nakajo2);
-    			}
-		    	delta = Date.now() - t;
-    			nakajo1.move(delta);
-    			nakajo1.updateUI();
-		    	nakajo2.move(delta);
-		    	nakajo2.updateUI();
-    			t = Date.now();
+				delta = Date.now() - t;
+				for(i = 0; i < elasticBodies.length; i++) {
+					for(j = 0; j < elasticBodies.length; j++) {
+						if (i != j){
+				   			if(elasticBodies[i].contact(elasticBodies[j]))
+								elasticBodies[i].collide(elasticBodies[j]);
+							}
+						} 
+						elasticBodies[i].move(delta);
+						elasticBodies[i].updateUI();
+					}
+				t = Date.now();
 			}, delta);
 	</script>
 </html>
