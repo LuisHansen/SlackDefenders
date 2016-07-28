@@ -4,12 +4,13 @@ class ElasticBody {
 	//@TODO massa
 
 
-	constructor(div, initialPosition, initialSpeed, width, height) {
+	constructor(div, initialPosition, initialSpeed, width, height, mass) {
+		this.div = div;
 		this.x = initialPosition
 		this.speed = initialSpeed;
 		this.width = width;
 		this.height = height;
-		this.div = div;
+		this.mass = mass;
 	}
 
 	move(delta) {
@@ -30,20 +31,11 @@ class ElasticBody {
 	}
 
 	/*Os dois objetos colidem. O método atualiza as velocidades deles */
-	static collision (elasticBody1, elasticBody2) {
-		//@TODO 
+	collide (obstacle) {
+		//var energy = (1 * this.speed ** 2 + 1 * obstacle.speed ** 2) / 2;
+		//var momentum = (1 * this.speed + 1 * obstacle.speed );
+		var aux = obstacle.speed; 
+		obstacle.speed = (aux * (obstacle.mass - this.mass) + 2 * this.mass * this.speed) / (obstacle.mass + this.mass);
+		this.speed = (this.speed * (this.mass - obstacle.mass) + 2 * obstacle.mass * aux) / (obstacle.mass + this.mass);
 	}
 }
-/*
-elasticBody1 = new ElasticBody(0,0);
-elasticBody2 = new ElasticBody(1,0);
-elasticBody3 = new ElasticBody(2,0);
-elasticBody4 = new ElasticBody(3,0);
-
-divBattle = [
-	elasticBody1,
-	elasticBody2,
-	elasticBody3,
-	elasticBody4,
-]; 
-*/
