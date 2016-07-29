@@ -17,14 +17,15 @@
 	</body>
 
 	<script>
-		top = $('.image img').position().top;
-		left = $('.image').position().left;
 
-		left1 = $('.image1').position().left
+		position = {x: $('.image').position().left, y: $('.image').position().top};
+		position1 = {x: $('.image1').position().left, y: $('.image1').position().top};
 
-    	nakajo1 = new ElasticBody($('.image'), left, 0.2, 50, 50, 10);
-    	nakajo2 = new ElasticBody($('.image1'), left1, 0.05, 50, 50, 10);
+		speed = {x: 0.1, y: 0};
+		speed1 = {x: 0.01, y: 0};
 
+    	nakajo1 = new ElasticBody($('.image'), position, speed, 50, 50, 10);
+    	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
 
     	elasticBodies = [
     		nakajo1,

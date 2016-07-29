@@ -2,7 +2,7 @@ class ElasticBody {
 
 	constructor(div, initialPosition, initialSpeed, width, height, mass) {
 		this.div = div;
-		this.x = initialPosition
+		this.position = initialPosition
 		this.speed = initialSpeed;
 		this.width = width;
 		this.height = height;
@@ -10,28 +10,31 @@ class ElasticBody {
 	}
 
 	move(delta) {
-		this.x += this.speed * delta;
+		this.position.x += this.speed.x * delta;
+		this.position.y += this.speed.y * delta;
 	}
 
 	updateUI () {
-		this.div.css({'left':this.x});
+		this.div.css({'left':this.position.x});
+		this.div.css({'top':this.position.y});
 	}	
 
-	/*Retorna true se estão em contato 
-	@FIXME 1 dimensao apenas por enquanto
-	*/
 	contact (elasticBody) {
-		var distanceX = Math.abs(this.x - elasticBody.x);
-		//distanceY = abs(this.y - elasticBody.y);
-		return distanceX <= (this.width+elasticBody.width)/2;		
+		var distanceX = Math.abs(this.position.x - elasticBody.position.x);
+		var distanceY = Math.abs(this.position.y - elasticBody.position.y);
+		return distanceX <= (this.width+elasticBody.width)/2 && distanceY <= (this.height+elasticBody.height)/2;		
 	}
 
-	/*Os dois objetos colidem. O método atualiza as velocidades deles */
 	collide (obstacle) {
-		//var energy = (1 * this.speed ** 2 + 1 * obstacle.speed ** 2) / 2;
-		//var momentum = (1 * this.speed + 1 * obstacle.speed );
-		var aux = obstacle.speed; 
-		obstacle.speed = (aux * (obstacle.mass - this.mass) + 2 * this.mass * this.speed) / (obstacle.mass + this.mass);
-		this.speed = (this.speed * (this.mass - obstacle.mass) + 2 * obstacle.mass * aux) / (obstacle.mass + this.mass);
+		var aux = obstacle.speed.x; 
+		obstacle.speed.x = (aux * (obstacle.mass - this.mass) + 2 * this.mass * this.speed.x) / (obstacle.mass + this.mass);
+		this.speed.x = (this.speed.x * (this.mass - obstacle.mass) + 2 * obstacle.mass * aux) / (obstacle.mass + this.mass);
+
+		aux =  obstacle.speed.y; 
+		obstacle.speed.y = (aux * (obstacle.mass - this.mass) + 2 * this.mass * this.speed.y) / (obstacle.mass + this.mass);
+		this.speed.y = (this.speed.y * (this.mass - obstacle.mass) + 2 * obstacle.mass * aux) / (obstacle.mass + this.mass);
 	}
 }
+
+
+
