@@ -12,11 +12,17 @@
 			<img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png"/>
 		</div> 
 		<div class="image1" style="left: 500px">
-			<img src="/home/mmendonca/Pictures/Untitled Folder 2/levy.png"/>
+			<img src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
 		</div> 
-		<div class="image2" style="left: 700px">
-			<img src="/home/mmendonca/Pictures/Untitled Folder 2/levy.png"/>
+		<div class="image2" style="left: 600px">
+			<img src="https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png"/>
 		</div> 
+		<div class="image3" style="left: 700px">
+			<img src="https://emoji.slack-edge.com/T0NGK4FPS/barbolo/0264986ce425c000.png"/>
+		</div>
+		<div class="image4" style="left: 400px; top: 400px;">
+			<img style="width: 150px !important; height: 150px !important" src="https://emoji.slack-edge.com/T0NGK4FPS/roma/69e76a7cf0bacf90.png"/>
+		</div>
 	</body>
 
 	<script>
@@ -24,25 +30,33 @@
 		position = {x: $('.image').position().left, y: $('.image').position().top};
 		position1 = {x: $('.image1').position().left, y: $('.image1').position().top};
 		position2 = {x: $('.image2').position().left, y: $('.image2').position().top};
+		position3 = {x: $('.image3').position().left, y: $('.image3').position().top};
+		position4 = {x: $('.image4').position().left, y: $('.image4').position().top};
 
 
-		speed = {x: 0.5, y: 0.1};
-		speed1 = {x: 0.1, y: 0.1};
-		speed2 = {x: 0.2, y: 0.2};
+		speed = {x: 0.9, y: -0.1};
+		speed1 = {x: 0.5, y: -0.8};
+		speed2 = {x: 0.7, y: 0.3};
+		speed3 = {x: 0.5, y: -0.8};
+		speed4 = {x: 0.1, y: 0.1};
 
 
     	nakajo1 = new ElasticBody($('.image'), position, speed, 50, 50, 10);
     	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
-    	  nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
+    	nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
+    	nakajo4 = new ElasticBody($('.image3'), position3, speed3, 50, 50, 10);
+    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 150, 100);
 
 
     	elasticBodies = [
     		nakajo1,
     		nakajo2,
-    		nakajo3
+    		nakajo3,
+    		nakajo4,
+    		roma
 		];
 
-		delta = 1.0/60 * 1000;
+		delta = 1.0/480 * 1000;
 		var t = Date.now() - delta;
     	
     	setInterval(
@@ -61,5 +75,18 @@
 					}
 				t = Date.now();
 			}, delta);
+
+		    var $elie = $(".image4"), degree = 0, timer;
+		    function rotate() {
+		        
+		        $elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+		        $elie.css({ '-webkit-transform-origin': '75px 75px' });
+		        $elie.css({ '-moz-transform': 'rotate(' + degree + 'deg)'});
+		        $elie.css({'-moz-transform-origin': '75px 75px' });                      
+		        timer = setTimeout(function() {
+		            ++degree; rotate();
+		        },5);
+		    }
+		    rotate();
 	</script>
 </html>

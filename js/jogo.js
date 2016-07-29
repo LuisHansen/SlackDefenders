@@ -22,7 +22,7 @@ class ElasticBody {
 	contact (elasticBody) {
 		var distanceX = Math.abs(this.position.x - elasticBody.position.x);
 		var distanceY = Math.abs(this.position.y - elasticBody.position.y);
-		return distanceX <= (this.width+elasticBody.width)/2 && distanceY <= (this.height+elasticBody.height)/2;		
+		return distanceX <= (this.width+elasticBody.width)/1.7 && distanceY <= (this.height+elasticBody.height)/1.7;		
 	}
 
 	collide (obstacle) {
