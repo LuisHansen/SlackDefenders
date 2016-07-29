@@ -7,11 +7,15 @@ class ElasticBody {
 		this.width = width;
 		this.height = height;
 		this.mass = mass;
+		var hitbox = new SAT.Box(new SAT.Vector(initialPosition.x,initialPosition.y), width, height);
+		this.hitpolygon = hitbox.toPolygon();
 	}
 
 	move(delta) {
 		this.position.x += this.speed.x * delta;
 		this.position.y += this.speed.y * delta;
+		this.hitpolygon.pos.x += this.speed.x * delta;
+		this.hitpolygon.pos.y += this.speed.y * delta;
 	}
 
 	updateUI () {
@@ -20,12 +24,13 @@ class ElasticBody {
 	}
 
 	contact(elasticBody) {
-	    return !(
-	        ((this.position.y + this.height) < (elasticBody.position.y)) ||
-	        (this.position.y > (elasticBody.position.y + elasticBody.height)) ||
-	        ((this.position.x + this.width) < elasticBody.position.x) ||
-	        (this.position.x > (elasticBody.position.x + elasticBody.width))
-	    );
+		return SAT.testPolygonPolygon(this.hitpolygon, elasticBody.hitpolygon);
+	    // return !(
+	    //     ((this.position.y + this.height) < (elasticBody.position.y)) ||
+	    //     (this.position.y > (elasticBody.position.y + elasticBody.height)) ||
+	    //     ((this.position.x + this.width) < elasticBody.position.x) ||
+	    //     (this.position.x > (elasticBody.position.x + elasticBody.width))
+	    // );
 	}
 
 	collide (obstacle) {

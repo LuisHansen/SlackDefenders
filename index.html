@@ -3,6 +3,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
 		</script>
 		<script src="js/jogo.js"></script>
+		<script src="js/SAT.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	</head>
@@ -78,7 +79,7 @@
 
 		    var $elie = $(".image4"), degree = 0, timer;
 		    function rotate() {
-		        
+		        roma.hitpolygon.angle += degree;
 		        $elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
 		        $elie.css({ '-webkit-transform-origin': '75px 75px' });
 		        $elie.css({ '-moz-transform': 'rotate(' + degree + 'deg)'});
