@@ -45,7 +45,7 @@
     	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
     	nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
     	nakajo4 = new ElasticBody($('.image3'), position3, speed3, 50, 50, 10);
-    	roma = new ElasticBody($('.image4'), position4, speed4, 170, 170, 100);
+    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 150, 20);
 
 
     	elasticBodies = [
@@ -56,7 +56,7 @@
     		roma
 		];
 
-		delta = 1.0/4800 * 1000;
+		delta = 1.0/240 * 1000;
 		var t = Date.now() - delta;
     	
     	setInterval(

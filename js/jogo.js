@@ -17,12 +17,15 @@ class ElasticBody {
 	updateUI () {
 		this.div.css({'left':this.position.x});
 		this.div.css({'top':this.position.y});
-	}	
+	}
 
-	contact (elasticBody) {
-		var distanceX = Math.abs(this.position.x - elasticBody.position.x);
-		var distanceY = Math.abs(this.position.y - elasticBody.position.y);
-		return distanceX <= (this.width+elasticBody.width)/1.9 && distanceY <= (this.height+elasticBody.height)/1.9;
+	contact(elasticBody) {
+	    return !(
+	        ((this.position.y + this.height) < (elasticBody.position.y)) ||
+	        (this.position.y > (elasticBody.position.y + elasticBody.height)) ||
+	        ((this.position.x + this.width) < elasticBody.position.x) ||
+	        (this.position.x > (elasticBody.position.x + elasticBody.width))
+	    );
 	}
 
 	collide (obstacle) {
@@ -36,8 +39,8 @@ class ElasticBody {
 	}
 
 	collide_wall(document) {
-		var top = this.position.y <= this.height/2;
-		var left = this.position.x <= this.width/2;
+		var top = this.position.y <= 0;
+		var left = this.position.x <= 0;
 		var right = this.position.x >= document.width()-this.height/2;
 		var bottom = this.position.y >= document.height()-this.width/2;
 
