@@ -22,7 +22,7 @@ class ElasticBody {
 	contact (elasticBody) {
 		var distanceX = Math.abs(this.position.x - elasticBody.position.x);
 		var distanceY = Math.abs(this.position.y - elasticBody.position.y);
-		return distanceX <= (this.width+elasticBody.width)/1.7 && distanceY <= (this.height+elasticBody.height)/1.7;		
+		return distanceX <= (this.width+elasticBody.width)/1.9 && distanceY <= (this.height+elasticBody.height)/1.9;
 	}
 
 	collide (obstacle) {
@@ -36,10 +36,10 @@ class ElasticBody {
 	}
 
 	collide_wall(document) {
-		var top = this.position.y <= 0;
-		var left = this.position.x <= 0;
-		var right = this.position.x >= document.width();
-		var bottom = this.position.y >= document.height();
+		var top = this.position.y <= this.height/2;
+		var left = this.position.x <= this.width/2;
+		var right = this.position.x >= document.width()-this.height/2;
+		var bottom = this.position.y >= document.height()-this.width/2;
 
 		if(top || bottom) {
 			this.speed.y = (-1) * this.speed.y; 
