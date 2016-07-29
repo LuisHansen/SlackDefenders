@@ -14,22 +14,32 @@
 		<div class="image1" style="left: 500px">
 			<img src="/home/mmendonca/Pictures/Untitled Folder 2/levy.png"/>
 		</div> 
+		<div class="image2" style="left: 700px">
+			<img src="/home/mmendonca/Pictures/Untitled Folder 2/levy.png"/>
+		</div> 
 	</body>
 
 	<script>
 
 		position = {x: $('.image').position().left, y: $('.image').position().top};
 		position1 = {x: $('.image1').position().left, y: $('.image1').position().top};
+		position2 = {x: $('.image2').position().left, y: $('.image2').position().top};
 
-		speed = {x: 0.1, y: 0};
-		speed1 = {x: 0.01, y: 0};
+
+		speed = {x: 0.5, y: 0.1};
+		speed1 = {x: 0.1, y: 0.1};
+		speed2 = {x: 0.2, y: 0.2};
+
 
     	nakajo1 = new ElasticBody($('.image'), position, speed, 50, 50, 10);
     	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
+    	  nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
+
 
     	elasticBodies = [
     		nakajo1,
-    		nakajo2
+    		nakajo2,
+    		nakajo3
 		];
 
 		delta = 1.0/60 * 1000;
@@ -45,6 +55,7 @@
 								elasticBodies[i].collide(elasticBodies[j]);
 							}
 						} 
+						elasticBodies[i].collide_wall($(document));
 						elasticBodies[i].move(delta);
 						elasticBodies[i].updateUI();
 					}
