@@ -12,13 +12,13 @@
 		<div class="image" style="left: 100px">
 			<img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png"/>
 		</div> 
-		<div class="image1" style="left: 500px">
+		<div class="image1" style="left: 500px; top: 100px;">
 			<img src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
 		</div> 
-		<div class="image2" style="left: 600px">
+		<div class="image2" style="left: 800px; top: 600px;">
 			<img src="https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png"/>
 		</div> 
-		<div class="image3" style="left: 700px">
+		<div class="image3" style="left: 700px; top: 500px;">
 			<img src="https://emoji.slack-edge.com/T0NGK4FPS/barbolo/0264986ce425c000.png"/>
 		</div>
 		<div class="image4" style="left: 400px; top: 400px;">
@@ -37,7 +37,7 @@
 
 		speed = {x: 0.9, y: -0.1};
 		speed1 = {x: 0.5, y: -0.8};
-		speed2 = {x: 0.7, y: 0.3};
+		speed2 = {x: -0.7, y: 0.3};
 		speed3 = {x: 0.5, y: -0.8};
 		speed4 = {x: 0.1, y: 0.1};
 
@@ -46,7 +46,7 @@
     	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
     	nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
     	nakajo4 = new ElasticBody($('.image3'), position3, speed3, 50, 50, 10);
-    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 150, 20);
+    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 150, 5);
 
 
     	elasticBodies = [
@@ -57,7 +57,7 @@
     		roma
 		];
 
-		delta = 1.0/240 * 1000;
+		delta = 1.0/120 * 1000;
 		var t = Date.now() - delta;
     	
     	setInterval(
@@ -81,13 +81,13 @@
 		    function rotate() {
 		        roma.hitpolygon.angle += degree;
 		        $elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
-		        $elie.css({ '-webkit-transform-origin': '75px 75px' });
+		        $elie.css({ '-webkit-transform-origin': '0px 0px' });
 		        $elie.css({ '-moz-transform': 'rotate(' + degree + 'deg)'});
-		        $elie.css({'-moz-transform-origin': '75px 75px' });                      
+		        $elie.css({'-moz-transform-origin': '0px 0px' });                      
 		        timer = setTimeout(function() {
 		            ++degree; rotate();
 		        },5);
 		    }
-		    rotate();
+		    //rotate();
 	</script>
 </html>

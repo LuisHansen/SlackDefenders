@@ -41,13 +41,14 @@ class ElasticBody {
 		aux =  obstacle.speed.y; 
 		obstacle.speed.y = (aux * (obstacle.mass - this.mass) + 2 * this.mass * this.speed.y) / (obstacle.mass + this.mass);
 		this.speed.y = (this.speed.y * (this.mass - obstacle.mass) + 2 * obstacle.mass * aux) / (obstacle.mass + this.mass);
+
 	}
 
 	collide_wall(document) {
-		var top = this.position.y <= 0;
-		var left = this.position.x <= 0;
-		var right = this.position.x >= document.width()-this.height/2;
-		var bottom = this.position.y >= document.height()-this.width/2;
+		var top = this.position.y <= 1;
+		var left = this.position.x <= 1;
+		var right = this.position.x >= document.width()-this.height+1;
+		var bottom = this.position.y >= document.height()-this.width+1;
 
 		if(top || bottom) {
 			this.speed.y = (-1) * this.speed.y; 
