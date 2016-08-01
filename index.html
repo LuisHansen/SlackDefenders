@@ -43,8 +43,8 @@
 	    function rotateearth(){
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
-	    		++degree2; rotateearth();
-	    	},100);
+	    		degree2 += 0.005; rotateearth();
+	    	},(1/60));
 	    }
 	    function rotate(){
 	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
