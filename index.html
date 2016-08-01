@@ -35,18 +35,18 @@
 		position4 = {x: $('.image4').position().left, y: $('.image4').position().top};
 
 
-		speed = {x: 0.9, y: -0.1};
+		speed = {x: 5.9, y: -0.1};
 		speed1 = {x: 0.5, y: -0.8};
 		speed2 = {x: 0.7, y: 0.3};
 		speed3 = {x: 0.5, y: -0.8};
 		speed4 = {x: 0.1, y: 0.1};
 
 
-    	nakajo1 = new ElasticBody($('.image'), position, speed, 50, 50, 10);
+    	nakajo1 = new ElasticBody($('.image'), position, speed, 50, 50, 1000);
     	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
     	nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
     	nakajo4 = new ElasticBody($('.image3'), position3, speed3, 50, 50, 10);
-    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 150, 20);
+    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 180, 200);
 
 
     	elasticBodies = [
