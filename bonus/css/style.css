@@ -1,0 +1,18 @@
+body {
+	background-color: #205000;
+}
+
+.scene {
+	display: flex;
+	align-items: center;
+	background-image: url("../img/27ac7fcf04a535428ce3f19700f70d7c.jpg");
+	background-size: contain;
+	height: 80%;
+	margin-top: 5%;
+	width: 100%;
+}
+
+.pony {
+	margin-left: 50%;
+	transform: scale(-1, 1);
+}
