@@ -1,93 +1,65 @@
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
 		</script>
 		<script src="js/jogo.js"></script>
 		<script src="js/SAT.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-
 	</head>
-	<body>
-	<h1>Nakajo</h1>
-		<div class="image" style="left: 100px">
-			<img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png"/>
+	<body bgcolor="#000000">
+		<div class="stars"></div>
+		<div class="twinkling"></div>
+		<h3 class="titulo">Aperte espaço para mudar a direção</h3><br>
+		<h3 class="titulo">e enter para atirar</h3>
+		<div class="terradiv">
+			<img id="terra" src="./Earth-Free-Download-PNG.png"/>
 		</div> 
-		<div class="image1" style="left: 500px; top: 100px;">
-			<img src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
+		<div class="image1">
+			<img id="eric" src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
 		</div> 
-		<div class="image2" style="left: 800px; top: 600px;">
-			<img src="https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png"/>
-		</div> 
-		<div class="image3" style="left: 700px; top: 500px;">
-			<img src="https://emoji.slack-edge.com/T0NGK4FPS/barbolo/0264986ce425c000.png"/>
-		</div>
-		<div class="image4" style="left: 400px; top: 400px;">
-			<img style="width: 150px !important; height: 150px !important" src="https://emoji.slack-edge.com/T0NGK4FPS/roma/69e76a7cf0bacf90.png"/>
-		</div>
 	</body>
 
 	<script>
-
-		position = {x: $('.image').position().left, y: $('.image').position().top};
-		position1 = {x: $('.image1').position().left, y: $('.image1').position().top};
-		position2 = {x: $('.image2').position().left, y: $('.image2').position().top};
-		position3 = {x: $('.image3').position().left, y: $('.image3').position().top};
-		position4 = {x: $('.image4').position().left, y: $('.image4').position().top};
-
-
-		speed = {x: 0.9, y: -0.1};
-		speed1 = {x: 0.5, y: -0.8};
-		speed2 = {x: -0.7, y: 0.3};
-		speed3 = {x: 0.5, y: -0.8};
-		speed4 = {x: 0.1, y: 0.1};
-
-
-    	nakajo1 = new ElasticBody($('.image'), position, speed, 50, 50, 10);
-    	nakajo2 = new ElasticBody($('.image1'), position1, speed1, 50, 50, 10);
-    	nakajo3 = new ElasticBody($('.image2'), position2, speed2, 50, 50, 10);
-    	nakajo4 = new ElasticBody($('.image3'), position3, speed3, 50, 50, 10);
-    	roma = new ElasticBody($('.image4'), position4, speed4, 150, 150, 5);
-
-
-    	elasticBodies = [
-    		nakajo1,
-    		nakajo2,
-    		nakajo3,
-    		nakajo4,
-    		roma
-		];
-
-		delta = 1.0/120 * 1000;
-		var t = Date.now() - delta;
-    	
-    	setInterval(
-    		function() {
-				delta = Date.now() - t;
-				for(i = 0; i < elasticBodies.length; i++) {
-					for(j = 0; j < elasticBodies.length; j++) {
-						if (i != j){
-				   			if(elasticBodies[i].contact(elasticBodies[j]))
-								elasticBodies[i].collide(elasticBodies[j]);
-							}
-						} 
-						elasticBodies[i].collide_wall($(document));
-						elasticBodies[i].move(delta);
-						elasticBodies[i].updateUI();
-					}
-				t = Date.now();
-			}, delta);
-
-		    var $elie = $(".image4"), degree = 0, timer;
-		    function rotate() {
-		        roma.hitpolygon.angle += degree;
-		        $elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
-		        $elie.css({ '-webkit-transform-origin': '0px 0px' });
-		        $elie.css({ '-moz-transform': 'rotate(' + degree + 'deg)'});
-		        $elie.css({'-moz-transform-origin': '0px 0px' });                      
-		        timer = setTimeout(function() {
-		            ++degree; rotate();
-		        },5);
-		    }
-		    //rotate();
+		window.addEventListener("keydown", change, false);
+		window.addEventListener("keyup", shootdetector, false);
+	    var $elie = $('.image1');
+	    var $earth = $('.terradiv');
+	    var degree = 0;
+	    var degree2 = 0;
+	    var direction = true;
+	    function change(e){
+	    	if(e.keyCode == '32'){
+	    		direction = !direction;
+	    	}
+	    }
+	    function shootdetector(e){
+	    	if (e.keyCode == '13'){
+	    		setTimeout(function() {
+	    			shoot();
+	    		}, 1);
+	    	}
+	    }
+	    function rotateearth(){
+	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
+	    	timer = setTimeout(function() {
+	    		++degree2; rotateearth();
+	    	},100);
+	    }
+	    function rotate(){
+	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+			timer = setTimeout(function() {
+				if(direction){
+	    			--degree; rotate();
+				} else {
+					++degree; rotate();
+				}
+			},0.01);
+	    }
+	    function shoot(){
+	    	console.log("TIRO!");
+	    }
+	    rotate();
+	    rotateearth();
 	</script>
 </html>
