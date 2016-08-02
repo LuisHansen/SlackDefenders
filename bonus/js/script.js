@@ -6,9 +6,9 @@ $(document).ready(function() {
 	$(function() {
 		var x = 0;
 		setInterval(function () {
-			moveBackground(x -= 1);
+			moveBackground(x -= 25);
 			
-		}, 10000)
+		}, 50)
 	})
 
 	var ponies = $('.pony');

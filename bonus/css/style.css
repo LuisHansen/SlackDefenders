@@ -3,7 +3,7 @@ body {
 }
 
 .scene {
-	display: flex;
+	padding-top: 15%;
 	background-image: url("../img/27ac7fcf04a535428ce3f19700f70d7c.jpg");
 	background-size: contain;
 	height: 80%;
