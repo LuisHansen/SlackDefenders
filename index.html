@@ -29,6 +29,14 @@
 	    var degree2 = 0;
 	    var direction = true;
 	    var shoots = [];
+	    var id = 1;
+	    var salesid = "s1";
+	    var salesnum = 1;
+	    var salesvetor = [];
+
+	    earthBody = new ElasticBody($earth, pos = {x:$earth.position().left,y:$earth.position().top}, {x:0,y:0}, 50, 50, 100000000);
+	    salesvetor.push(earthBody);
+
 	    function change(e){
 	    	if(e.keyCode == '32'){
 	    		direction = !direction;
@@ -47,6 +55,13 @@
 	    	timer = setTimeout(function() {
 	    		degree2 += 0.005;
 	    		for (i=0; i<shoots.length; i++){
+	    			for (j=0; j<salesvetor.length; j++){
+	    				if (shoots[i].contact(salesvetor[j])){
+	    					shoots[i].collide(salesvetor[j]);
+	    				}
+	    				salesvetor[j].move(1/60);
+	    				salesvetor[j].updateUI();
+	    			}
 		    		shoots[i].move(1/60);
 		    		shoots[i].updateUI();
 	    		}
@@ -67,28 +82,43 @@
 				} else {
 					++degree; rotate();
 				}
-			},0.01);
+			},1/120);
 	    }
 	    function shoot(){
 	    	var shootdiv = document.createElement('div');
-	    	var id = (((1+Math.random())*0x10000)|0).toString(16).substring(1);
 	    	shootdiv.id = id;
 	    	shootdiv.className = 'tiro';
 	    	document.getElementsByTagName('body')[0].appendChild(shootdiv);
-	    	divshootquery = "'#"+id+"'";
 	    	$divshoot = $("#"+id);
+	    	id ++;
 	    	$divshoot.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
 	    	x = Math.cos(degree*Math.PI/180);
 	    	y = Math.sin(degree*Math.PI/180);
 	    	var speed = { x: x*500, y: y*500 };
-	    	//var pos = { x: $earth.position().left+80*Math.cos(degree*Math.PI/180), y: $earth.position().top+80*Math.sin(degree*Math.PI/180) };
-	    	var pos = { x: $earth.position().left, y: $earth.position().top };
-	    	tiro = new ElasticBody($divshoot, pos, speed, 100, 20, 10);
+	    	var pos = { x: $earth.position().left+80*Math.cos(degree*Math.PI/180), y: $earth.position().top+80*Math.sin(degree*Math.PI/180) };
+	    	//var pos = { x: $earth.position().left, y: $earth.position().top };
+	    	tiro = new ElasticBody($divshoot, pos, speed, 50, 5, 1);
+	    	tiro.hitpolygon.angle = degree;
 	    	shoots.push(tiro);
 	    	if ( shoots.length > 10 ) {
 	    		shoots.shift();
 	    	}
+	    	if (id > 10) {
+	    		document.getElementById(String(id-10)).remove();
+	    	}
 	    }
+	    function geradorDeSales(){
+	    	var salesdiv = document.createElement('div');
+	    	salesdiv.id = salesid;
+	    	salesdiv.className = 'sales';
+	    	document.getElementsByTagName('body')[0].appendChild(salesdiv);
+	    	$divsales = $("#"+salesid);
+	    	salesid = "s"+salesnum;
+	    	$divsales.css({"top":"300", "left":"300"});
+	    	sales = new ElasticBody($divsales, pos = {x:300,y:300}, {x:0,y:0}, 50, 50, 1000);
+	    	salesvetor.push(sales);
+	    }
+	    geradorDeSales();
 	    rotate();
 	    rotateearth();
 	</script>
