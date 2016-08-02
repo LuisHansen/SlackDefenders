@@ -28,6 +28,7 @@
 	    var degree = 0;
 	    var degree2 = 0;
 	    var direction = true;
+	    var shoots = [];
 	    function change(e){
 	    	if(e.keyCode == '32'){
 	    		direction = !direction;
@@ -35,19 +36,30 @@
 	    }
 	    function shootdetector(e){
 	    	if (e.keyCode == '13'){
-	    		setTimeout(function() {
-	    			shoot();
-	    		}, 1);
+	    		shoot();
 	    	}
 	    }
 	    function rotateearth(){
-	    	if degree == 360
+	    	if (degree2 == 360 || degree2 == -360){
+	    		degree2 = 0;
+	    	}
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
-	    		degree2 += 0.005; rotateearth();
+	    		degree2 += 0.005;
+	    		for (i=0; i<shoots.length; i++){
+		    		shoots[i].move(1/60);
+		    		shoots[i].updateUI();
+	    		}
+	    		rotateearth();
 	    	},(1/60));
 	    }
 	    function rotate(){
+	    	if (degree == 360 || degree == -360){
+	    		degree = 0;
+	    	}
+	    	if (degree < 0){
+	    		degree = 360 + degree;
+	    	}
 	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
 			timer = setTimeout(function() {
 				if(direction){
@@ -58,7 +70,24 @@
 			},0.01);
 	    }
 	    function shoot(){
-	    	console.log("TIRO!");
+	    	var shootdiv = document.createElement('div');
+	    	var id = (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	    	shootdiv.id = id;
+	    	shootdiv.className = 'tiro';
+	    	document.getElementsByTagName('body')[0].appendChild(shootdiv);
+	    	divshootquery = "'#"+id+"'";
+	    	$divshoot = $("#"+id);
+	    	$divshoot.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+	    	x = Math.cos(degree*Math.PI/180);
+	    	y = Math.sin(degree*Math.PI/180);
+	    	var speed = { x: x*500, y: y*500 };
+	    	//var pos = { x: $earth.position().left+80*Math.cos(degree*Math.PI/180), y: $earth.position().top+80*Math.sin(degree*Math.PI/180) };
+	    	var pos = { x: $earth.position().left, y: $earth.position().top };
+	    	tiro = new ElasticBody($divshoot, pos, speed, 100, 20, 10);
+	    	shoots.push(tiro);
+	    	if ( shoots.length > 10 ) {
+	    		shoots.shift();
+	    	}
 	    }
 	    rotate();
 	    rotateearth();

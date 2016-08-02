@@ -1,4 +1,7 @@
-
+body, html{
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
 #terra{
 	width: 150px;
 	height: 150px;
@@ -7,7 +10,7 @@
 	margin-left: -75px;
 	top: 50%;
 	left: 50%;
-	z-index: 1;
+	z-index: 10;
 }
 
 #eric{
@@ -18,7 +21,7 @@
 	margin-left: 85px;
 	top: 50%;
 	left: 50%;
-	z-index: 1;
+	z-index: 10;
 }
 
 .image1{
@@ -26,7 +29,7 @@
 	top: 50%;
 	left: 50%;
 	transform-origin: 50% 50%;
-	z-index: 1;
+	z-index: 10;
 }
 
 .titulo{
@@ -34,7 +37,7 @@
 	text-align: center;
 	font-family: sans-serif;
 	color: #ffffff;
-	z-index: 1;
+	z-index: 10;
 }
 
 .terradiv{
@@ -42,7 +45,19 @@
 	top: 50%;
 	left: 50%;
 	transform-origin: 50% 50%;
+	z-index: 10;
+}
+
+.tiro{
 	z-index: 1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 10px;
+	transform-origin: 0% 50%;
+	color: red;
+	background-color: red;
 }
 
 @keyframes move-twink-back {
