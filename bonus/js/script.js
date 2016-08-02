@@ -8,6 +8,12 @@ $(document).ready(function() {
 		setInterval(function () {
 			moveBackground(x -= 1);
 			
-		}, 10)
+		}, 10000)
+	})
+
+	var ponies = $('.pony');
+	var i = 0;
+	ponies.each(function() {
+
 	})
 });

@@ -4,7 +4,6 @@ body {
 
 .scene {
 	display: flex;
-	align-items: center;
 	background-image: url("../img/27ac7fcf04a535428ce3f19700f70d7c.jpg");
 	background-size: contain;
 	height: 80%;
@@ -15,4 +14,7 @@ body {
 .pony {
 	margin-left: 50%;
 	transform: scale(-1, 1);
+	clear: right;
+	height: 58px;
+	width: 62px;
 }
