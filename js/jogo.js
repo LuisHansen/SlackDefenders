@@ -65,27 +65,47 @@ class ElasticBody {
 }
 
 function start() {
-	//rotate();
-	//rotateearth();
+	rotate();
+	rotateearth();
 	generateEnemies(0);
 }
 
 function generateEnemies(counter) {
-	var delay = Math.random() * 1000 * 10 * Math.exp(- 0.3 * counter);
+	var delay = Math.random() * 1000 * 1 * Math.exp(- 0.2 * Math.pow(counter, 0.2));
+
+	var earth = $('#terra');
+	var scene = $('.scene');
 
 	setTimeout(function() {
 
-		var position = {
-			top: Math.random() * $('.scene').height(),
-			left: Math.random() * $('.scene').width()
+		var random = Math.random();
+
+		if (random < 0.25) {
+			position = {
+				top : Math.random() * scene.height(),
+				left: 0
+			}
+		} else if (random < 0.5) {
+			position = {
+				top : 0,
+				left: Math.random() * scene.width()
+			}
+		} else if (random < 0.75) {
+			position = {
+				top : Math.random() * scene.height(),
+				left: scene.width()
+			}
+		} else {
+			position = {
+				top : scene.height(),
+				left: Math.random() * scene.width()
+			}
 		}
 
 		var size = {
-			height: Math.random() * 30 + 20,
-			width: Math.random() * 30 + 20,
+			height: Math.random() * 40 + 40,
+			width: Math.random() * 40 + 40,
 		}
-
-		console.log(position);
 
 		var div = $('.villain.template').clone();
 		div.removeClass('template');
@@ -95,7 +115,7 @@ function generateEnemies(counter) {
 		div.width(size.width);
 		
 
-		$('.scene').append(div);
+		scene.append(div);
 		div.show();
 
 		var enemy = new ElasticBody(div, 50, 50, 50, 50, 0.5);
