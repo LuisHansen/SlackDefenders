@@ -8,16 +8,21 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body bgcolor="#000000">
-		<div class="stars"></div>
-		<div class="twinkling"></div>
-		<h3 class="titulo">Aperte espaço para mudar a direção</h3><br>
-		<h3 class="titulo">e enter para atirar</h3>
-		<div class="terradiv">
-			<img id="terra" src="./Earth-Free-Download-PNG.png"/>
-		</div> 
-		<div class="image1">
-			<img id="eric" src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
-		</div> 
+		<div class="scene">
+			<div class="stars"></div>
+			<div class="twinkling"></div>
+			<h3 class="titulo">Aperte espaço para mudar a direção</h3><br>
+			<h3 class="titulo">e enter para atirar</h3>
+			<div class="terradiv">
+				<img id="terra" src="./Earth-Free-Download-PNG.png"/>
+			</div> 
+			<div class="image1">
+				<img id="eric" src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
+			</div>
+		</div>
+		<div class="villain template">
+			<img src="https://emoji.slack-edge.com/T0NGK4FPS/salles/eefac6cd78a94882.png" />
+		</div>
 	</body>
 
 	<script>
@@ -107,19 +112,7 @@
 	    		document.getElementById(String(id-10)).remove();
 	    	}
 	    }
-	    function geradorDeSales(){
-	    	var salesdiv = document.createElement('div');
-	    	salesdiv.id = salesid;
-	    	salesdiv.className = 'sales';
-	    	document.getElementsByTagName('body')[0].appendChild(salesdiv);
-	    	$divsales = $("#"+salesid);
-	    	salesid = "s"+salesnum;
-	    	$divsales.css({"top":"300", "left":"300"});
-	    	sales = new ElasticBody($divsales, pos = {x:300,y:300}, {x:0,y:0}, 50, 50, 1000);
-	    	salesvetor.push(sales);
-	    }
-	    geradorDeSales();
-	    rotate();
-	    rotateearth();
+
+	    $(document).ready(start)
 	</script>
 </html>

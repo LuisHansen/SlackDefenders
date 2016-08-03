@@ -64,5 +64,41 @@ class ElasticBody {
 	}
 }
 
+function start() {
+	//rotate();
+	//rotateearth();
+	generateEnemies(0);
+}
 
+function generateEnemies(counter) {
+	var delay = Math.random() * 1000 * 10 * Math.exp(- 0.3 * counter);
 
+	setTimeout(function() {
+
+		var position = {
+			top: Math.random() * $('.scene').height(),
+			left: Math.random() * $('.scene').width()
+		}
+
+		var size = {
+			height: Math.random() * 30 + 20,
+			width: Math.random() * 30 + 20,
+		}
+
+		console.log(position);
+
+		var div = $('.villain.template').clone();
+		div.removeClass('template');
+		div.css('top', position.top);
+		div.css('left', position.left);
+		div.height(size.height);
+		div.width(size.width);
+		
+
+		$('.scene').append(div);
+		div.show();
+
+		var enemy = new ElasticBody(div, 50, 50, 50, 50, 0.5);
+		generateEnemies(counter + 1);
+	}, delay);
+}
