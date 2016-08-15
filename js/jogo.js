@@ -25,12 +25,6 @@ class ElasticBody {
 
 	contact(elasticBody) {
 		return SAT.testPolygonPolygon(this.hitpolygon, elasticBody.hitpolygon);
-	    // return !(
-	    //     ((this.position.y + this.height) < (elasticBody.position.y)) ||
-	    //     (this.position.y > (elasticBody.position.y + elasticBody.height)) ||
-	    //     ((this.position.x + this.width) < elasticBody.position.x) ||
-	    //     (this.position.x > (elasticBody.position.x + elasticBody.width))
-	    // );
 	}
 
 	collide (obstacle) {
@@ -56,69 +50,89 @@ class ElasticBody {
 		if(right || left){ 
 			this.speed.x = (-1) * this.speed.x;
 		}
-
-
-
-
-
 	}
 }
 
 function start() {
 	rotate();
 	rotateearth();
-	generateEnemies(0);
+	var pontos = 0;
+	generateLevel(1);
 }
 
-function generateEnemies(counter) {
-	var delay = Math.random() * 1000 * 1 * Math.exp(- 0.2 * Math.pow(counter, 0.2));
+function generateLevel(level) {
+	if (level == 1){
+		if (enemies.length < 5){
+			timer = setTimeout(function() {
+				enemies.push(generateEnemy());
+				console.log(enemies);
+				generateLevel(1);
+			},2000);
+		}
+	}
+}
 
+function generateEnemy() {
 	var earth = $('#terra');
 	var scene = $('.scene');
-
-	setTimeout(function() {
-
-		var random = Math.random();
-
-		if (random < 0.25) {
-			position = {
-				top : Math.random() * scene.height(),
-				left: 0
-			}
-		} else if (random < 0.5) {
-			position = {
-				top : 0,
-				left: Math.random() * scene.width()
-			}
-		} else if (random < 0.75) {
-			position = {
-				top : Math.random() * scene.height(),
-				left: scene.width()
-			}
-		} else {
-			position = {
-				top : scene.height(),
-				left: Math.random() * scene.width()
-			}
-		}
-
-		var size = {
-			height: Math.random() * 40 + 40,
-			width: Math.random() * 40 + 40,
-		}
-
-		var div = $('.villain.template').clone();
-		div.removeClass('template');
-		div.css('top', position.top);
-		div.css('left', position.left);
-		div.height(size.height);
-		div.width(size.width);
-		
-
-		scene.append(div);
-		div.show();
-
-		var enemy = new ElasticBody(div, 50, 50, 50, 50, 0.5);
-		generateEnemies(counter + 1);
-	}, delay);
+	var wh = Math.random() * 80 + 40;
+	var size = {
+		height: wh+20,
+		width: wh
+	}
+	var random = Math.random();
+	// if (random < 0.25) {
+	// 	position = {
+	// 		top : Math.random() * scene.height(),
+	// 		left: 0 - size.width
+	// 	};
+	// 	speed = {
+	// 		y: earth.position().top - position.top,
+	// 		x: earth.position().left
+	// 	}
+	// } else if (random < 0.5) {
+	// 	position = {
+	// 		top : 0 - size.height,
+	// 		left: Math.random() * scene.width()
+	// 	};
+	// 	speed = {
+	// 		y: earth.position().top,
+	// 		x: earth.position().left - position.left
+	// 	}
+	// } else if (random < 0.75) {
+	// 	position = {
+	// 		top : Math.random() * scene.height(),
+	// 		left: scene.width() + size.width
+	// 	};
+	// 	speed = {
+	// 		y: earth.position().top * (-1),
+	// 		x: earth.position().left - position.left
+	// 	}
+	// } else {
+	// 	position = {
+	// 		top : scene.height() + size.height,
+	// 		left: Math.random() * scene.width()
+	// 	};
+	// 	speed = {
+	// 		y: earth.position().top - position.top,
+	// 		x: earth.position().left * (-1)
+	// 	}
+	// }
+	position = {
+		y: 100,
+		x: 100
+	};
+	speed = {
+		x: 10,
+		y: 10,
+	};
+	var div = $('.villain.template').clone();
+	div.removeClass('template');
+	div.css('top', position.y);
+	div.css('left', position.x);
+	div.height(size.height);
+	div.width(size.width);
+	scene.append(div);
+	div.show();
+	return enemy = new ElasticBody(div, position, speed, size.width, size.height, 200);
 }

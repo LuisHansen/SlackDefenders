@@ -37,10 +37,7 @@
 	    var id = 1;
 	    var salesid = "s1";
 	    var salesnum = 1;
-	    var salesvetor = [];
-
-	    earthBody = new ElasticBody($earth, pos = {x:$earth.position().left,y:$earth.position().top}, {x:0,y:0}, 50, 50, 100000000);
-	    salesvetor.push(earthBody);
+	    var enemies = [];
 
 	    function change(e){
 	    	if(e.keyCode == '32'){
@@ -60,12 +57,12 @@
 	    	timer = setTimeout(function() {
 	    		degree2 += 0.005;
 	    		for (i=0; i<shoots.length; i++){
-	    			for (j=0; j<salesvetor.length; j++){
-	    				if (shoots[i].contact(salesvetor[j])){
-	    					shoots[i].collide(salesvetor[j]);
+	    			for (j=0; j<enemies.length; j++){
+	    				if (shoots[i].contact(enemies[j])){
+	    					shoots[i].collide(enemies[j]);
 	    				}
-	    				salesvetor[j].move(1/60);
-	    				salesvetor[j].updateUI();
+	    				enemies[j].move(1/60);
+	    				enemies[j].updateUI();
 	    			}
 		    		shoots[i].move(1/60);
 		    		shoots[i].updateUI();
@@ -83,9 +80,9 @@
 	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
 			timer = setTimeout(function() {
 				if(direction){
-	    			--degree; rotate();
+	    			degree-=0.5; rotate();
 				} else {
-					++degree; rotate();
+					degree+=0.5; rotate();
 				}
 			},1/120);
 	    }
