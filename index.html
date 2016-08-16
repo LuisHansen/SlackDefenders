@@ -13,6 +13,8 @@
 			<div class="twinkling"></div>
 			<h3 class="titulo">Aperte espaço para mudar a direção</h3><br>
 			<h3 class="titulo">e enter para atirar</h3>
+			<br>
+			<h3 class="pontuacao">Score: <span id="minha-pontuacao-linda">120</span></h3>
 			<div class="terradiv">
 				<img id="terra" src="./Earth-Free-Download-PNG.png"/>
 			</div> 
@@ -37,6 +39,7 @@
 	    var id = 1;
 	    var salesnum = 1;
 	    var enemies = [];
+	    var score = 0;
 
 	    function change(e){
 	    	if(e.keyCode == '32'){
@@ -59,6 +62,8 @@
 	    			for (j=0; j<shoots.length; j++){
 	    				if (enemies[i].contact(shoots[j])){
 	    					enemies[i].collide(shoots[j]);
+	    					document.getElementById(shoots[j].div[0].id).remove();
+	    					shoots.splice(j,1);
 	    				}
 	    			}
 	    		};
@@ -73,10 +78,11 @@
 	    		for (i=0;i<enemies.length;i++){
 					var wd = $('.scene').width();
 					var ht = $('.scene').height();
-					if ( enemies[i].collided && (enemies[i].position.x < 0 || enemies[i].position.x > wd || enemies[i].position.y < 0 || enemies[i].position.y > ht )){
+					if ( enemies[i].collided && (enemies[i].position.x < -enemies[i].width || enemies[i].position.x > wd || enemies[i].position.y < -enemies[i].height || enemies[i].position.y > ht )){
 						enemies[i].div.hide()
 						enemies.splice(i,1);
-						console.log(enemies);
+						score += 20;
+						$('#minha-pontuacao-linda').html(score);
 					}
 				};
 	    		rotateearth();
@@ -117,7 +123,7 @@
 	    	if ( shoots.length > 10 ) {
 	    		shoots.shift();
 	    	}
-	    	if (id > 10) {
+	    	if (id > 10 && document.getElementById(String(id-10))) {
 	    		document.getElementById(String(id-10)).remove();
 	    	}
 	    }

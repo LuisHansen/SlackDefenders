@@ -61,7 +61,6 @@ class ElasticBody {
 function start() {
 	rotate();
 	rotateearth();
-	var pontos = 0;
 	generateLevel(1);
 }
 
@@ -118,9 +117,8 @@ function generateEnemy() {
 	div.height(size.height);
 	div.width(size.width);
 	salesnum += 1;
-	var salesid = "s"+ salesnum;
-	// div.id(salesid);
+	div.id = "s"+ salesnum;
 	scene.append(div);
 	div.show();
-	return enemy = new ElasticBody(div, position, speed, size.width, size.height, 200);
+	return enemy = new ElasticBody(div, position, speed, size.width, size.height, wh);
 }
