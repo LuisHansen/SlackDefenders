@@ -116,6 +116,7 @@ function generateEnemy() {
 	div.css('left', position.x);
 	div.height(size.height);
 	div.width(size.width);
+
 	salesnum += 1;
 	div.id = "s"+ salesnum;
 	scene.append(div);
