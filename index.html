@@ -40,15 +40,24 @@
 	    var salesnum = 1;
 	    var enemies = [];
 	    var score = 0;
+	    var multiplier = 1;
 
 	    function change(e){
 	    	if(e.keyCode == '32'){
 	    		direction = !direction;
+	    	} else if(e.keyCode == '13'){
+	    		setTimeout(function(){
+	    			multiplier = 2*multiplier;
+	    		},2000);
+	    		setTimeout(function(){
+	    			multiplier = 2*multiplier;
+	    		},2000);
 	    	}
 	    }
 	    function shootdetector(e){
 	    	if (e.keyCode == '13'){
-	    		shoot();
+	    		shoot(multiplier);
+	    		multiplier = 1;
 	    	}
 	    }
 	    function rotateearth(){
@@ -105,7 +114,7 @@
 				}
 			},1/120);
 	    }
-	    function shoot(){
+	    function shoot(multiplicador){
 	    	var shootdiv = document.createElement('div');
 	    	shootdiv.id = id;
 	    	shootdiv.className = 'tiro';
@@ -118,7 +127,7 @@
 	    	var speed = { x: x*500, y: y*500 };
 	    	var pos = { x: $earth.position().left+80*Math.cos(degree*Math.PI/180), y: $earth.position().top+80*Math.sin(degree*Math.PI/180) };
 	    	//var pos = { x: $earth.position().left, y: $earth.position().top };
-	    	tiro = new ElasticBody($divshoot, pos, speed, 50, 5, 1);
+	    	tiro = new ElasticBody($divshoot, pos, speed, 50, 5, multiplicador);
 	    	tiro.hitpolygon.angle = degree;
 	    	shoots.push(tiro);
 	    	if ( shoots.length > 10 ) {
