@@ -35,7 +35,6 @@
 	    var direction = true;
 	    var shoots = [];
 	    var id = 1;
-	    var salesid = "s1";
 	    var salesnum = 1;
 	    var enemies = [];
 
@@ -56,17 +55,30 @@
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
 	    		degree2 += 0.005;
-	    		for (i=0; i<shoots.length; i++){
-	    			for (j=0; j<enemies.length; j++){
-	    				if (shoots[i].contact(enemies[j])){
-	    					shoots[i].collide(enemies[j]);
+	    		for (i=0; i<enemies.length; i++){
+	    			for (j=0; j<shoots.length; j++){
+	    				if (enemies[i].contact(shoots[j])){
+	    					enemies[i].collide(shoots[j]);
 	    				}
-	    				enemies[j].move(1/60);
-	    				enemies[j].updateUI();
 	    			}
-		    		shoots[i].move(1/60);
-		    		shoots[i].updateUI();
-	    		}
+	    		};
+	    		for (i=0; i<enemies.length; i++){
+	    			enemies[i].move(1/60);
+	    			enemies[i].updateUI();
+	    		};
+	    		for (i=0; i<shoots.length; i++){
+	    			shoots[i].move(1/60);
+	    			shoots[i].updateUI();
+	    		};
+	    		for (i=0;i<enemies.length;i++){
+					var wd = $('.scene').width();
+					var ht = $('.scene').height();
+					if ( enemies[i].collided && (enemies[i].position.x < 0 || enemies[i].position.x > wd || enemies[i].position.y < 0 || enemies[i].position.y > ht )){
+						enemies[i].div.hide()
+						enemies.splice(i,1);
+						console.log(enemies);
+					}
+				};
 	    		rotateearth();
 	    	},(1/60));
 	    }

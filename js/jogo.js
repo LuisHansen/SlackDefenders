@@ -9,6 +9,7 @@ class ElasticBody {
 		this.mass = mass;
 		var hitbox = new SAT.Box(new SAT.Vector(initialPosition.x,initialPosition.y), width, height);
 		this.hitpolygon = hitbox.toPolygon();
+		this.collided = false;
 	}
 
 	move(delta) {
@@ -24,6 +25,9 @@ class ElasticBody {
 	}
 
 	contact(elasticBody) {
+		if(this.collided == false){
+			this.collided = SAT.testPolygonPolygon(this.hitpolygon, elasticBody.hitpolygon);
+		}
 		return SAT.testPolygonPolygon(this.hitpolygon, elasticBody.hitpolygon);
 	}
 
@@ -43,7 +47,6 @@ class ElasticBody {
 		var left = this.position.x <= 1;
 		var right = this.position.x >= document.width()-this.height+1;
 		var bottom = this.position.y >= document.height()-this.width+1;
-
 		if(top || bottom) {
 			this.speed.y = (-1) * this.speed.y; 
 		}
@@ -51,6 +54,8 @@ class ElasticBody {
 			this.speed.x = (-1) * this.speed.x;
 		}
 	}
+
+
 }
 
 function start() {
@@ -62,18 +67,17 @@ function start() {
 
 function generateLevel(level) {
 	if (level == 1){
-		if (enemies.length < 5){
-			timer = setTimeout(function() {
+		timer = setTimeout(function() {
+			if (enemies.length < 5){
 				enemies.push(generateEnemy());
-				console.log(enemies);
-				generateLevel(1);
-			},2000);
-		}
+			}
+			generateLevel(1);
+		},2000);
 	}
 }
 
 function generateEnemy() {
-	var earth = $('#terra');
+	var earth = $('.terradiv');
 	var scene = $('.scene');
 	var wh = Math.random() * 80 + 40;
 	var size = {
@@ -81,50 +85,31 @@ function generateEnemy() {
 		width: wh
 	}
 	var random = Math.random();
-	// if (random < 0.25) {
-	// 	position = {
-	// 		top : Math.random() * scene.height(),
-	// 		left: 0 - size.width
-	// 	};
-	// 	speed = {
-	// 		y: earth.position().top - position.top,
-	// 		x: earth.position().left
-	// 	}
-	// } else if (random < 0.5) {
-	// 	position = {
-	// 		top : 0 - size.height,
-	// 		left: Math.random() * scene.width()
-	// 	};
-	// 	speed = {
-	// 		y: earth.position().top,
-	// 		x: earth.position().left - position.left
-	// 	}
-	// } else if (random < 0.75) {
-	// 	position = {
-	// 		top : Math.random() * scene.height(),
-	// 		left: scene.width() + size.width
-	// 	};
-	// 	speed = {
-	// 		y: earth.position().top * (-1),
-	// 		x: earth.position().left - position.left
-	// 	}
-	// } else {
-	// 	position = {
-	// 		top : scene.height() + size.height,
-	// 		left: Math.random() * scene.width()
-	// 	};
-	// 	speed = {
-	// 		y: earth.position().top - position.top,
-	// 		x: earth.position().left * (-1)
-	// 	}
-	// }
-	position = {
-		y: 100,
-		x: 100
-	};
+	if (random < 0.25) {
+		position = {
+			y : Math.random() * scene.height(),
+			x: 0 - size.width
+		};
+		
+	} else if (random < 0.5) {
+		position = {
+			y : 0 - size.height,
+			x: Math.random() * scene.width()
+		}
+	} else if (random < 0.75) {
+		position = {
+			y : Math.random() * scene.height(),
+			x: scene.width() + size.width
+		}
+	} else {
+		position = {
+			y : scene.height() + size.height,
+			x: Math.random() * scene.width()
+		}
+	}
 	speed = {
-		x: 10,
-		y: 10,
+			y: (earth.position().top - position.y) * 0.03,
+			x: (earth.position().left - position.x) * 0.03
 	};
 	var div = $('.villain.template').clone();
 	div.removeClass('template');
@@ -132,6 +117,9 @@ function generateEnemy() {
 	div.css('left', position.x);
 	div.height(size.height);
 	div.width(size.width);
+	salesnum += 1;
+	var salesid = "s"+ salesnum;
+	// div.id(salesid);
 	scene.append(div);
 	div.show();
 	return enemy = new ElasticBody(div, position, speed, size.width, size.height, 200);
