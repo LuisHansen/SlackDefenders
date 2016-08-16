@@ -61,16 +61,23 @@ class ElasticBody {
 function start() {
 	rotate();
 	rotateearth();
-	generateLevel(1);
+	generateLevel();
 }
 
-function generateLevel(level) {
+function generateLevel() {
 	if (level == 1){
 		timer = setTimeout(function() {
 			if (enemies.length < 5){
 				enemies.push(generateEnemy());
 			}
 			generateLevel(1);
+		},2000);
+	} else if (level == 2){
+		timer = setTimeout(function() {
+			if (enemies.length < 15){
+				enemies.push(generateEnemy());
+			}
+			generateLevel(2);
 		},2000);
 	}
 }
