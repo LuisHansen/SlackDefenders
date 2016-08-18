@@ -102,15 +102,43 @@ body, html{
   z-index: -10;
 }
 
+.invert{
+	filter: invert(100%) !important;
+	-webkit-filter: invert(100%);
+}
+
+.acid {
+  z-index: -10;
+  transform-origin: 50% 50%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+#acid{
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  margin-top: -25%;
+  margin-left: -10px;
+}
+
 .twinkling{
   background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
   z-index:-10;
- 
   -moz-animation:move-twink-back 200s linear infinite;
   -ms-animation:move-twink-back 200s linear infinite;
   -o-animation:move-twink-back 200s linear infinite;
   -webkit-animation:move-twink-back 200s linear infinite;
   animation:move-twink-back 200s linear infinite;
+}
+
+.transparent {
+	opacity:0;
+}
+
+.transparent {
+	opacity:0;
 }
 
 .villain {
@@ -136,4 +164,15 @@ body, html{
 .pontuacao{
 	float: right;
 	color: white;
+}
+
+#cf2 img {
+  -webkit-transition: opacity 5s ease-in-out;
+  -moz-transition: opacity 5s ease-in-out;
+  -o-transition: opacity 5s ease-in-out;
+  transition: opacity 5s ease-in-out;
+}
+
+#cf2 img.transparent {
+	opacity:0;
 }

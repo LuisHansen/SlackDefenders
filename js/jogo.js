@@ -74,11 +74,18 @@ function generateLevel() {
 		},2000);
 	} else if (level == 2){
 		timer = setTimeout(function() {
-			if (enemies.length < 15){
+			if (enemies.length < 7){
 				enemies.push(generateEnemy());
 			}
 			generateLevel(2);
-		},2000);
+		},1500);
+	} else if (level == 3){
+		timer = setTimeout(function() {
+			if (enemies.length < 10){
+				enemies.push(generateEnemy());
+			}
+			generateLevel(3);
+		},1000);
 	}
 }
 
@@ -114,8 +121,8 @@ function generateEnemy() {
 		}
 	}
 	speed = {
-			y: (earth.position().top - position.y) * 0.03,
-			x: (earth.position().left - position.x) * 0.03
+			y: (earth.position().top - position.y) * 0.03 * level,
+			x: (earth.position().left - position.x) * 0.03 * level
 	};
 	var div = $('.villain.template').clone();
 	div.removeClass('template');

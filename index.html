@@ -11,12 +11,17 @@
 		<div class="scene">
 			<div class="stars"></div>
 			<div class="twinkling"></div>
+			<div class="acid transparent ">
+				<img id="acid" src="./acid1.gif"/>
+			</div>
 			<h3 class="titulo">Aperte espaço para mudar a direção</h3><br>
 			<h3 class="titulo">e enter para atirar</h3>
 			<br>
 			<h3 class="pontuacao">Score: <span id="minha-pontuacao-linda">120</span></h3>
-			<div class="terradiv">
-				<img id="terra" src="./Earth-Free-Download-PNG.png"/>
+			<div class="terradiv shadow" id="cf2">
+				<img class="3" id="terra" src="./swirl_final.png"/>
+				<img class="2" id="terra" src="./eye-026.png"/>
+				<img class="1" id="terra" src="./Earth-Free-Download-PNG.png"/>
 			</div> 
 			<div class="image1">
 				<img id="eric" src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
@@ -62,13 +67,25 @@
 	    		multiplier = 1;
 	    	}
 	    }
+	    function invertcolors(){
+	    	setTimeout(function(){
+	    		$("#eric").toggleClass("invert");
+	    		$(".villain").toggleClass("invert");
+	    		$(".tiro").toggleClass("invert");
+	    		invertcolors()
+	    	},200);
+	    }
 	    function rotateearth(){
 	    	if (degree2 == 360 || degree2 == -360){
 	    		degree2 = 0;
 	    	}
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
-	    		degree2 += 0.005;
+	    		if(level == 1 || level == 2){
+	    			degree2 += 0.005;
+	    		} else if(level == 3){
+	    			degree2 -= 2;
+	    		}
 	    		for (i=0; i<enemies.length; i++){
 	    			for (j=0; j<shoots.length; j++){
 	    				if (enemies[i].contact(shoots[j])){
@@ -95,8 +112,17 @@
 						enemies.splice(i,1);
 						score += 20;
 						$('#minha-pontuacao-linda').html(score);
-						if (score == 1000){
+						if (score == 100){
 							level ++;
+							$("#cf2 img.1").toggleClass("transparent");
+							$(".stars").toggleClass("transparent");
+							$(".twinkling").toggleClass("transparent");
+						}
+						if (score == 200){
+							level ++;
+							$("#cf2 img.2").toggleClass("transparent");
+							$(".acid").toggleClass("transparent");
+							invertcolors();
 						}
 					}
 				};
@@ -113,9 +139,17 @@
 	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
 			timer = setTimeout(function() {
 				if(direction){
-	    			degree-=0.5; rotate();
+					if (level < 3){
+	    				degree-=0.5; rotate();
+					} else {
+						degree-=1; rotate();
+					}
 				} else {
-					degree+=0.5; rotate();
+					if (level < 3){
+						degree+=0.5; rotate();
+					} else {
+						degree+=1; rotate();
+					}
 				}
 			},1/120);
 	    }
