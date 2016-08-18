@@ -1,6 +1,6 @@
 class ElasticBody {
 
-	constructor(div, initialPosition, initialSpeed, width, height, mass) {
+	constructor(div, initialPosition, initialSpeed, width, height, mass, acid) {
 		this.div = div;
 		this.position = initialPosition
 		this.speed = initialSpeed;
@@ -10,6 +10,7 @@ class ElasticBody {
 		var hitbox = new SAT.Box(new SAT.Vector(initialPosition.x,initialPosition.y), width, height);
 		this.hitpolygon = hitbox.toPolygon();
 		this.collided = false;
+		this.acid = acid;
 	}
 
 	move(delta) {
@@ -71,7 +72,7 @@ function generateLevel() {
 				enemies.push(generateEnemy());
 			}
 			generateLevel(1);
-		},2000);
+		},1000);
 	} else if (level == 2){
 		timer = setTimeout(function() {
 			if (enemies.length < 7){
@@ -103,7 +104,6 @@ function generateEnemy() {
 			y : Math.random() * scene.height(),
 			x: 0 - size.width
 		};
-		
 	} else if (random < 0.5) {
 		position = {
 			y : 0 - size.height,
@@ -124,16 +124,37 @@ function generateEnemy() {
 			y: (earth.position().top - position.y) * 0.03 * level,
 			x: (earth.position().left - position.x) * 0.03 * level
 	};
-	var div = $('.villain.template').clone();
-	div.removeClass('template');
-	div.css('top', position.y);
-	div.css('left', position.x);
-	div.height(size.height);
-	div.width(size.width);
+	random = Math.random();
+	if (random < 0.5 ){
+		acid = true;
+	} else {
+		acid = false;
+	}
+	if (!acid){
+		var div = $('.villain.template').clone();
+		div.removeClass('template');
+		div.css('top', position.y);
+		div.css('left', position.x);
+		div.height(size.height);
+		div.width(size.width);
 
-	salesnum += 1;
-	div.id = "s"+ salesnum;
-	scene.append(div);
-	div.show();
-	return enemy = new ElasticBody(div, position, speed, size.width, size.height, wh);
+		salesnum += 1;
+		div.id = "s"+ salesnum;
+		scene.append(div);
+		div.show();
+		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, wh, false);
+	} else if (acid) {
+		var div = $('.smiley.template').clone();
+		div.removeClass('template');
+		div.css('top', position.y);
+		div.css('left', position.x);
+		div.height(size.height);
+		div.width(size.width);
+
+		salesnum += 1;
+		div.id = "s"+ salesnum;
+		scene.append(div);
+		div.show();
+		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, wh, true);
+	}
 }

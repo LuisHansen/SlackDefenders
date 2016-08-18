@@ -150,6 +150,15 @@ body, html{
 	height: 100%;
 }
 
+.smiley {
+	position: absolute;
+}
+
+.smiley img {
+	width: 100%;
+	height: 100%;
+}
+
 .template {
 	display: none;
 }

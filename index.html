@@ -30,6 +30,9 @@
 		<div class="villain template">
 			<img src="https://emoji.slack-edge.com/T0NGK4FPS/salles/eefac6cd78a94882.png" />
 		</div>
+		<div class="smiley template">
+			<img src="./smiley.png" />
+		</div>
 	</body>
 
 	<script>
@@ -47,6 +50,7 @@
 	    var score = 0;
 	    var multiplier = 1;
 	    var level = 1;
+	    var acidtrip = false;
 
 	    function change(e){
 	    	if(e.keyCode == '32'){
@@ -92,7 +96,11 @@
 	    					enemies[i].collide(shoots[j]);
 	    					document.getElementById(shoots[j].div[0].id).remove();
 	    					shoots.splice(j,1);
-							$(enemies[i].div).find('img').attr("src","https://lh5.googleusercontent.com/-ybsaLXodIAk/V7ND4jj07hI/AAAAAAAAAVU/ivUhWXycGYcdkhtiwYv4pFIMwuWdVX93gCL0B/w80-h100-no/angrysales.png");
+	    					if (!enemies[i].acid){
+								$(enemies[i].div).find('img').attr("src","https://lh5.googleusercontent.com/-ybsaLXodIAk/V7ND4jj07hI/AAAAAAAAAVU/ivUhWXycGYcdkhtiwYv4pFIMwuWdVX93gCL0B/w80-h100-no/angrysales.png");
+							} else {
+								acidtrip = true;
+							}
 	    				}
 	    			}
 	    		};
@@ -118,7 +126,7 @@
 							$(".stars").toggleClass("transparent");
 							$(".twinkling").toggleClass("transparent");
 						}
-						if (score == 200){
+						if (acidtrip){
 							level ++;
 							$("#cf2 img.2").toggleClass("transparent");
 							$(".acid").toggleClass("transparent");
@@ -166,7 +174,7 @@
 	    	var speed = { x: x*500, y: y*500 };
 	    	var pos = { x: $earth.position().left+80*Math.cos(degree*Math.PI/180), y: $earth.position().top+80*Math.sin(degree*Math.PI/180) };
 	    	//var pos = { x: $earth.position().left, y: $earth.position().top };
-	    	tiro = new ElasticBody($divshoot, pos, speed, 50, 5, multiplicador);
+	    	tiro = new ElasticBody($divshoot, pos, speed, 50, 5, multiplicador, false);
 	    	tiro.hitpolygon.angle = degree;
 	    	shoots.push(tiro);
 	    	if ( shoots.length > 10 ) {
