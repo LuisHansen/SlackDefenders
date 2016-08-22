@@ -86,51 +86,51 @@ function generateLevel() {
 				enemies.push(generateEnemy());
 			}
 			generateLevel(3);
-		},1000);
+		},500);
 	}
 }
 
 function generateEnemy() {
 	var earth = $('.terradiv');
 	var scene = $('.scene');
-	var wh = Math.random() * 80 + 40;
-	var size = {
-		height: wh+20,
-		width: wh
-	}
-	var random = Math.random();
-	if (random < 0.25) {
-		position = {
-			y : Math.random() * scene.height(),
-			x: 0 - size.width
-		};
-	} else if (random < 0.5) {
-		position = {
-			y : 0 - size.height,
-			x: Math.random() * scene.width()
-		}
-	} else if (random < 0.75) {
-		position = {
-			y : Math.random() * scene.height(),
-			x: scene.width() + size.width
-		}
-	} else {
-		position = {
-			y : scene.height() + size.height,
-			x: Math.random() * scene.width()
-		}
-	}
-	speed = {
-			y: (earth.position().top - position.y) * 0.03 * level,
-			x: (earth.position().left - position.x) * 0.03 * level
-	};
 	random = Math.random();
-	if (random < 0.5 ){
+	if (random < 0.05 ){
 		acid = true;
 	} else {
 		acid = false;
 	}
 	if (!acid){
+		var wh = Math.random() * 80 + 40;
+		var size = {
+			height: wh+20,
+			width: wh
+		}
+		var random = Math.random();
+		if (random < 0.25) {
+			position = {
+				y : Math.random() * scene.height(),
+				x: 0 - size.width
+			};
+		} else if (random < 0.5) {
+			position = {
+				y : 0 - size.height,
+				x: Math.random() * scene.width()
+			}
+		} else if (random < 0.75) {
+			position = {
+				y : Math.random() * scene.height(),
+				x: scene.width() + size.width
+			}
+		} else {
+			position = {
+				y : scene.height() + size.height,
+				x: Math.random() * scene.width()
+			}
+		}
+		speed = {
+				y: (earth.position().top - position.y) * 0.03 * level,
+				x: (earth.position().left - position.x) * 0.03 * level
+		};
 		var div = $('.villain.template').clone();
 		div.removeClass('template');
 		div.css('top', position.y);
@@ -142,8 +142,42 @@ function generateEnemy() {
 		div.id = "s"+ salesnum;
 		scene.append(div);
 		div.show();
-		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, wh, false);
+		if (acidtrip){
+			return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, 10, false);
+		} else {
+			return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, wh, false);
+		}
 	} else if (acid) {
+		var size = {
+			height: 20,
+			width: 20
+		}
+		var random = Math.random();
+		if (random < 0.25) {
+			position = {
+				y : Math.random() * scene.height(),
+				x: 0 - size.width
+			};
+		} else if (random < 0.5) {
+			position = {
+				y : 0 - size.height,
+				x: Math.random() * scene.width()
+			}
+		} else if (random < 0.75) {
+			position = {
+				y : Math.random() * scene.height(),
+				x: scene.width() + size.width
+			}
+		} else {
+			position = {
+				y : scene.height() + size.height,
+				x: Math.random() * scene.width()
+			}
+		}
+		speed = {
+				y: (earth.position().top - position.y) * 0.1,
+				x: (earth.position().left - position.x) * 0.1
+		};
 		var div = $('.smiley.template').clone();
 		div.removeClass('template');
 		div.css('top', position.y);
@@ -155,6 +189,6 @@ function generateEnemy() {
 		div.id = "s"+ salesnum;
 		scene.append(div);
 		div.show();
-		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, wh, true);
+		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, 10, true);
 	}
 }
