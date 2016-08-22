@@ -107,14 +107,17 @@
 	    					if (!enemies[i].acid){
 								$(enemies[i].div).find('img').attr("src","https://lh5.googleusercontent.com/-ybsaLXodIAk/V7ND4jj07hI/AAAAAAAAAVU/ivUhWXycGYcdkhtiwYv4pFIMwuWdVX93gCL0B/w80-h100-no/angrysales.png");
 							} else {
-								if (!acidtrip && level < 3){
-									$("#cf2 img.2").toggleClass("transparent");
-									$(".acid").toggleClass("transparent");
-								}
-								if (level < 3){
-									$("#cf2 img.1").toggleClass("transparent");
-									$(".stars").toggleClass("transparent");
-									$(".twinkling").toggleClass("transparent");
+								// Está ativando a acid trip
+								if (!acidtrip){
+									$(".acid").toggleClass("transparent"); // Vai mmostrar o bg sempre
+									if (level == 1){ //se estiver a Terra e estrelas ali
+										$("#cf2 img.1").toggleClass("transparent");
+										$("#cf2 img.2").toggleClass("transparent");
+										$(".stars").toggleClass("transparent");
+										$(".twinkling").toggleClass("transparent");
+									} else if (level == 2){ //senão só esconde o olho
+										$("#cf2 img.2").toggleClass("transparent");
+									}
 								}
 								if (!acidtrip){
 									acidtrip = true;
