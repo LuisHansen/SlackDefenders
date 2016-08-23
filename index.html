@@ -133,6 +133,7 @@
 	    		for (i=0; i<enemies.length; i++){
 	    			for (j=0; j<shoots.length; j++){
 	    				if (enemies[i].contact(shoots[j])){
+	    					gritar();
 	    					enemies[i].collide(shoots[j]);
 	    					document.getElementById(shoots[j].div[0].id).remove();
 	    					shoots.splice(j,1);

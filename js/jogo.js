@@ -55,8 +55,6 @@ class ElasticBody {
 			this.speed.x = (-1) * this.speed.x;
 		}
 	}
-
-
 }
 
 function start() {
@@ -193,4 +191,13 @@ function generateEnemy() {
 		div.show();
 		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, 10, true);
 	}
+}
+
+function gritar() {
+	var audio = new Audio();
+	audio.src = "audio.wav";
+	audio.play();
+	setTimeout(function() {
+		audio.pause();
+	}, 750);
 }
