@@ -8,21 +8,16 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body bgcolor="#000000">
-		<div class="hidden">
-			<iframe 
-			  src="https://www.youtube.com/embed/Vm0VBWnUhvU?rel=0&autoplay=1">
-			</iframe>
-		</div>
 		<div class="scene">
 			<div class="stars"></div>
 			<div class="twinkling"></div>
 			<div class="acid transparent ">
 				<img id="acid" src="./acid2.gif"/>
 			</div>
-			<h3 class="titulo">Aperte espaço para mudar a direção</h3><br>
-			<h3 class="titulo">e enter para atirar</h3>
-			<br>
-			<h3 class="pontuacao">Score: <span id="minha-pontuacao-linda">120</span></h3>
+			<div id="player" class="hidden"></div>
+			<h3 class="titulo">Aperte espaço para mudar a direção e enter para atirar</h3>
+			<h3 class="pontuacao">Score: <span id="minha-pontuacao-linda">0</span></h3>
+			<h3 class="levelup template">CREEPYPASTA!</h3>
 			<div class="terradiv shadow" id="cf2">
 				<img class="3" id="terra" src="./hypno.png"/>
 				<img class="2" id="terra" src="./eye-026.png"/>
@@ -56,6 +51,38 @@
 	    var multiplier = 1;
 	    var level = 1;
 	    var acidtrip = false;
+
+	    //youtube
+
+	    var tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		var player;
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+				height: $('.scene').height(),
+				width: $('.scene').width()	,
+				playerVars: {
+							autoplay: 0,
+							loop: 1,
+							controls: 0,
+							showinfo: 0,
+							autohide: 1,
+							modestbranding: 1,
+							vq: 'hd1080'},
+				videoId: '0eD4_zFt1c4',
+				events: {
+				}
+			});
+		}
+
+		function playvideo() {
+			player.playVideo();
+		}
+
+	    //youtube
 
 	    function change(e){
 	    	if(e.keyCode == '32'){
@@ -122,6 +149,8 @@
 										$(".twinkling").toggleClass("transparent");
 									} else if (level == 2){ //senão só esconde o olho
 										$("#cf2 img.2").toggleClass("transparent");
+										$('#player').addClass('hidden');
+										player.stopVideo();
 									}
 								}
 								if (!acidtrip){
@@ -150,8 +179,16 @@
 						enemies.splice(i,1);
 						score += 20;
 						$('#minha-pontuacao-linda').html(score);
-						if (score == 200 && level < 3 ){
+						if (score == 2000 && level < 3 ){
+							playvideo();
 							level ++;
+							setTimeout(function(){
+								$('#player').removeClass('hidden');
+							},1000);
+							var div = $('.levelup.template').clone();
+							div.removeClass('template');
+							$('.scene').append(div);
+							div.show();
 							$("#cf2 img.1").toggleClass("transparent");
 							$(".stars").toggleClass("transparent");
 							$(".twinkling").toggleClass("transparent");

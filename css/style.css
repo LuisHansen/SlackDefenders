@@ -32,14 +32,6 @@ body, html{
 	z-index: 10;
 }
 
-.titulo{
-	position: absolute;
-	text-align: center;
-	font-family: sans-serif;
-	color: #ffffff;
-	z-index: 10;
-}
-
 .terradiv{
 	position: absolute;
 	top: 50%;
@@ -170,9 +162,47 @@ body, html{
 	height: 100%;
 }
 
+.titulo{
+	position: relative;
+	text-align: left;
+	font-family: sans-serif;
+	color: #ffffff;
+	z-index: 10;
+	width: 300px;
+	margin: 30px;
+	margin-bottom: 0;
+}
+
 .pontuacao{
-	float: right;
+	float: left;
 	color: white;
+	text-align: center;
+	font-family: sans-serif;
+	margin: 30px;
+	margin-top: 10px;
+	z-index: 10;
+	color: red;
+}
+
+@keyframes levelrise{
+	from {transform: scale(1);
+		  opacity: 1;}
+	to {transform: scale(5);
+		opacity: 0;}
+}
+
+.levelup{
+	color: red;
+	position: absolute;
+	margin-left: -45px;
+	top: 20%;
+	left: 50%;
+	font-family: sans-serif;
+	font-weight: 900pt;
+	z-index: 10;
+	animation-name: levelrise;
+	animation-duration: 1.5s;
+	opacity: 0;
 }
 
 #cf2 img {
