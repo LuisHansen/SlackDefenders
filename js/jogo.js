@@ -55,8 +55,6 @@ class ElasticBody {
 			this.speed.x = (-1) * this.speed.x;
 		}
 	}
-
-
 }
 
 function start() {

@@ -53,12 +53,10 @@
 	    var acidtrip = false;
 
 	    //youtube
-
 	    var tag = document.createElement('script');
 		tag.src = "https://www.youtube.com/iframe_api";
 		var firstScriptTag = document.getElementsByTagName('script')[0];
 		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 		var player;
 		function onYouTubeIframeAPIReady() {
 			player = new YT.Player('player', {
@@ -77,13 +75,10 @@
 				}
 			});
 		}
-
 		function playvideo() {
 			player.playVideo();
 		}
-
 	    //youtube
-
 	    function change(e){
 	    	if(e.keyCode == '32'){
 	    		direction = !direction;
@@ -245,7 +240,6 @@
 	    		document.getElementById(String(id-10)).remove();
 	    	}
 	    }
-
 	    $(document).ready(start)
 	</script>
 </html>
