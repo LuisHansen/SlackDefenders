@@ -7,8 +7,8 @@
 		<script src="js/SAT.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
-	<body bgcolor="#000000">
-		<div class="scene">
+	<body bgcolor="#000000" onresize="updateEarth()">
+		<div class="scene" >
 			<div class="stars"></div>
 			<div class="twinkling"></div>
 			<div class="acid transparent ">
@@ -51,7 +51,8 @@
 	    var multiplier = 1;
 	    var level = 1;
 	    var acidtrip = false;
-
+	    var earthbody = new EarthBody({x:$earth.position().left,y:$earth.position().top},75);
+	    var stop = false;
 	    //youtube
 	    var tag = document.createElement('script');
 		tag.src = "https://www.youtube.com/iframe_api";
@@ -114,6 +115,26 @@
 	    		superscore();
 	    	},500)
 	    }
+	    function updateEarth(){
+	    	earthbody.update({x:$earth.position().left,y:$earth.position().top});
+	    }
+	    function explode(){
+	    	$elie.hide();
+			$earth.hide();
+			$('.stars').hide();
+			$('.twinkling').hide();
+			for (j=0;j<enemies.length;j++){
+				enemies[j].div.hide();
+			}
+			enemies = [];
+			for (j=0;j<shoots.length;j++){
+				shoots[j].div.hide();
+			}
+			shoots = [];
+			stop = true;
+			var oImg = "<img class='explosao' src='./exploding_earth1.gif' />";
+			$('.scene').append(oImg);
+	    }
 	    function rotateearth(){
 	    	if (degree2 == 360 || degree2 == -360){
 	    		degree2 = 0;
@@ -170,6 +191,10 @@
 	    		for (i=0;i<enemies.length;i++){
 					var wd = $('.scene').width();
 					var ht = $('.scene').height();
+					if ( earthbody.contact(enemies[i]) ){
+						explode();
+						return;
+					}
 					if ( enemies[i].collided && (enemies[i].position.x < -enemies[i].width || enemies[i].position.x > wd || enemies[i].position.y < -enemies[i].height || enemies[i].position.y > ht )){
 						enemies[i].div.hide()
 						enemies.splice(i,1);
@@ -202,6 +227,9 @@
 	    		degree = 360 + degree;
 	    	}
 	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+	       	if (stop){
+	       		return;
+	       	}
 			timer = setTimeout(function() {
 				if(direction){
 					if (level < 3){

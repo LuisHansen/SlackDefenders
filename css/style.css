@@ -90,7 +90,7 @@ body, html{
 }
 
 .stars {
-  background:#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+  background:#000 url(../stars.png) repeat top center;
   z-index: -10;
 }
 
@@ -115,8 +115,17 @@ body, html{
   margin-left: -10px;
 }
 
+.explosao{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -160px;
+	margin-left: -120px;
+	z-index: 11;
+}
+
 .twinkling{
-  background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+  background:transparent url(../twinkling.png) repeat top center;
   z-index:-10;
   -moz-animation:move-twink-back 200s linear infinite;
   -ms-animation:move-twink-back 200s linear infinite;

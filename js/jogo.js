@@ -57,6 +57,21 @@ class ElasticBody {
 	}
 }
 
+class EarthBody {
+	constructor(initialPosition, radius) {
+		this.radius = radius;
+		this.circle = new SAT.Circle(new SAT.Vector(initialPosition.x,initialPosition.y), this.radius);
+	}
+	contact(elasticBody) {
+		return SAT.testPolygonCircle(elasticBody.hitpolygon, this.circle);
+	}
+	update(newPosition){
+		delete this.circle;
+		this.circle = new SAT.Circle(new SAT.Vector(newPosition.x,newPosition.y), this.radius);
+	}
+}
+
+
 function start() {
 	rotate();
 	rotateearth();
@@ -143,9 +158,9 @@ function generateEnemy() {
 		scene.append(div);
 		div.show();
 		if (acidtrip){
-			return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, 10, false);
+			return enemy = new ElasticBody(div, position, speed, size.width, size.height, 10, false);
 		} else {
-			return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, wh, false);
+			return enemy = new ElasticBody(div, position, speed, size.width, size.height, wh, false);
 		}
 	} else if (acid) {
 		var size = {
