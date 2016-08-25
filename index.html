@@ -132,8 +132,10 @@
 			}
 			shoots = [];
 			stop = true;
-			var oImg = "<img class='explosao' src='./exploding_earth1.gif' />";
-			$('.scene').append(oImg);
+			if (!acidtrip){
+				var oImg = "<img class='explosao' src='./exploding_earth1.gif' />";
+				$('.scene').append(oImg);
+			}
 	    }
 	    function rotateearth(){
 	    	if (degree2 == 360 || degree2 == -360){
