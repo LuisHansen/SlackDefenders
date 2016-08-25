@@ -1,9 +1,11 @@
-# simulador-de-colisao
-
 ATENÇÃO: não use em caso de histórico de epilepsia ou convulções.
+
+# simulador-de-colisao
 
 Simulador de colisão usando carinhas do Slack.
 Basta abrir o index.html para visualizar.
+
+Alpha 1 - jogável, com bugs, faltam muitas coisas.
 
 TO DO:
 - Fazer inimigos girarem bonitamente;
