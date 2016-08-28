@@ -8,6 +8,11 @@ Basta abrir o index.html para visualizar.
 Alpha 1 - jogável, com bugs, faltam muitas coisas.
 
 TO DO:
+- Fazer o modo 1927 (clássico e preto e branco);
+- Fazer o modo MLG (pe pe pewww);]
+- Colocar temporizador nos modos diferentes;
+- Criar mais níveis;
+- Melhorar o modo Acid Trip;
 - Fazer inimigos girarem bonitamente;
 - Fazer um menu inicial com seletor de personagem;
 - Criar uma tabela de high-scores - surigo mongoDB;
