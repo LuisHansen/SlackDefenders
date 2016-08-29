@@ -53,6 +53,8 @@
 	    var acidtrip = false;
 	    var earthbody = new EarthBody({x:$earth.position().left,y:$earth.position().top},75);
 	    var stop = false;
+	    var specialLevel = false;
+	    var special = "";
 	    //youtube
 	    var tag = document.createElement('script');
 		tag.src = "https://www.youtube.com/iframe_api";
@@ -110,10 +112,12 @@
 		    }
 	    }
 	    function superscore(){
-	    	setTimeout(function(){
-	    		score += 1;
-	    		superscore();
-	    	},500)
+	    	if (specialLevel){
+		    	setTimeout(function(){
+		    		score += 1;
+		    		superscore();
+		    	},500);
+	    	}
 	    }
 	    function updateEarth(){
 	    	earthbody.update({x:$earth.position().left,y:$earth.position().top});
@@ -144,9 +148,9 @@
 	    	}
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
-	    		if(level == 1 || level == 2){
+	    		if(!specialLevel){
 	    			degree2 += 0.005;
-	    		} else if(level == 3){
+	    		} else {
 	    			degree2 += 8;
 	    		}
 	    		for (i=0; i<enemies.length; i++){
@@ -160,8 +164,25 @@
 								$(enemies[i].div).find('img').attr("src","https://lh5.googleusercontent.com/-ybsaLXodIAk/V7ND4jj07hI/AAAAAAAAAVU/ivUhWXycGYcdkhtiwYv4pFIMwuWdVX93gCL0B/w80-h100-no/angrysales.png");
 							} else {
 								// Está ativando a acid trip
+								specialLevel = true;
+								special = "acid";
+								setTimeout(function(){
+									specialLevel = false;
+									acidtrip = false;
+									if (level == 1){
+										$("#cf2 img.1").toggleClass("transparent");
+										$("#cf2 img.2").toggleClass("transparent");
+										$(".stars").toggleClass("transparent");
+										$(".twinkling").toggleClass("transparent");
+									} else if (level == 2 ){
+										$("#cf2 img.2").toggleClass("transparent");
+										$('#player').removeClass('hidden');
+										player.playVideo();
+									}
+									$(".acid").toggleClass("transparent");
+								},10000); // Timer dos niveis especiais
 								if (!acidtrip){
-									$(".acid").toggleClass("transparent"); // Vai mmostrar o bg sempre
+									$(".acid").toggleClass("transparent"); // Vai mostrar o bg sempre
 									if (level == 1){ //se estiver a Terra e estrelas ali
 										$("#cf2 img.1").toggleClass("transparent");
 										$("#cf2 img.2").toggleClass("transparent");
@@ -178,7 +199,6 @@
 									invertcolors();
 									superscore();
 								}
-								level = 3;
 							}
 	    				}
 	    			}
@@ -194,7 +214,7 @@
 	    		for (i=0;i<enemies.length;i++){
 					var wd = $('.scene').width();
 					var ht = $('.scene').height();
-					if ( earthbody.contact(enemies[i]) ){
+					if ( earthbody.contact(enemies[i]) && !enemies[i].acid ){
 						explode();
 						return;
 					}
@@ -203,7 +223,7 @@
 						enemies.splice(i,1);
 						score += 20;
 						$('#minha-pontuacao-linda').html(score);
-						if (score == 2000 && level < 3 ){
+						if (score == 100 && level < 3 ){
 							playvideo();
 							level ++;
 							setTimeout(function(){

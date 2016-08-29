@@ -79,27 +79,31 @@ function start() {
 }
 
 function generateLevel() {
-	if (level == 1){
-		timer = setTimeout(function() {
-			if (enemies.length < 5){
-				enemies.push(generateEnemy());
-			}
-			generateLevel(1);
-		},1000);
-	} else if (level == 2){
-		timer = setTimeout(function() {
-			if (enemies.length < 7){
-				enemies.push(generateEnemy());
-			}
-			generateLevel(2);
-		},1500);
-	} else if (level == 3){
-		timer = setTimeout(function() {
-			if (enemies.length < 10){
-				enemies.push(generateEnemy());
-			}
-			generateLevel(3);
-		},500);
+	if (!specialLevel){
+		if (level == 1){
+			timer = setTimeout(function() {
+				if (enemies.length < 5){
+					enemies.push(generateEnemy());
+				}
+				generateLevel();
+			},1000);
+		} else if (level == 2){
+			timer = setTimeout(function() {
+				if (enemies.length < 7){
+					enemies.push(generateEnemy());
+				}
+				generateLevel();
+			},1500);
+		}
+	} else if (specialLevel){
+		if (special == "acid"){
+			timer = setTimeout(function() {
+				if (enemies.length < 10){
+					enemies.push(generateEnemy());
+				}
+				generateLevel();
+			},500);
+		}
 	}
 }
 
@@ -107,7 +111,7 @@ function generateEnemy() {
 	var earth = $('.terradiv');
 	var scene = $('.scene');
 	random = Math.random();
-	if (random <= 0.02 ){
+	if (random <= 0.2 ){
 		if (!acidtrip){
 			acid = true;
 		}

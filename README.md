@@ -8,16 +8,17 @@ Basta abrir o index.html para visualizar.
 Alpha 1 - jogável, com bugs, faltam muitas coisas.
 
 TO DO:
+- Loja do Sr. Boucinhas;
 - Fazer o modo 1927 (clássico e preto e branco);
-- Fazer o modo MLG (pe pe pewww);]
-- Colocar temporizador nos modos diferentes;
+- Fazer o modo MLG (pe pe pewww);
 - Criar mais níveis;
-- Melhorar o modo Acid Trip;
 - Fazer inimigos girarem bonitamente;
 - Fazer um menu inicial com seletor de personagem;
 - Criar uma tabela de high-scores - surigo mongoDB;
 
 DONE:
+- Colocar temporizador nos modos diferentes;
+- Melhorar o modo Acid Trip;
 - Fazer o loop de interações da bala com o inimigo;
 - Criar um sistema de pontos;
 - Fazer os inimigos surgirem fora da tela e andarem, com velocidades diferentes, em direção à Terra;
