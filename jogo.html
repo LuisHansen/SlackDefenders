@@ -1,0 +1,329 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+		</script>
+		<script src="js/jogo.js"></script>
+		<script src="js/SAT.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body bgcolor="#000000" onresize="updateEarth()">
+		<div class="scene" >
+			<div class="stars"></div>
+			<div class="twinkling"></div>
+			<div class="acid transparent ">
+				<img id="acid" src="./acid2.gif"/>
+			</div>
+			<div id="player" class="hidden"></div>
+			<h3 class="titulo">Aperte espaço para mudar a direção e enter para atirar</h3>
+			<h3 class="pontuacao">Score: <span id="minha-pontuacao-linda">0</span></h3>
+			<h3 class="levelup template">CREEPYPASTA!</h3>
+			<div class="terradiv shadow" id="cf2">
+				<img class="3" id="terra" src="./hypno.png"/>
+				<img class="2" id="terra" src="./eye-026.png"/>
+				<img class="1" id="terra" src="./Earth-Free-Download-PNG.png"/>
+			</div> 
+			<div class="image1">
+				<img id="eric" src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
+			</div>
+		</div>
+		<div class="villain template">
+			<img id="vilaoimg" src="https://emoji.slack-edge.com/T0NGK4FPS/salles/eefac6cd78a94882.png" />
+		</div>
+		<div class="smiley template">
+			<img src="./smiley.png" />
+		</div>
+	</body>
+
+	<script>
+		window.addEventListener("keydown", change, false);
+		window.addEventListener("keyup", shootdetector, false);
+	    var $elie = $('.image1');
+	    var $earth = $('.terradiv');
+	    var degree = 0;
+	    var degree2 = 0;
+	    var direction = true;
+	    var shoots = [];
+	    var id = 1;
+	    var salesnum = 1;
+	    var enemies = [];
+	    var score = 0;
+	    var multiplier = 1;
+	    var level = 1;
+	    var acidtrip = false;
+	    var earthbody = new EarthBody({x:$earth.position().left,y:$earth.position().top},75);
+	    var stop = false;
+	    var specialLevel = false;
+	    var special = "";
+	    //youtube
+	    var tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		var player;
+		var QueryString = function () {
+			  // This function is anonymous, is executed immediately and 
+			  // the return value is assigned to QueryString!
+			  var query_string = {};
+			  var query = window.location.search.substring(1);
+			  var vars = query.split("&");
+			  for (var i=0;i<vars.length;i++) {
+			    var pair = vars[i].split("=");
+			        // If first entry with this name
+			    if (typeof query_string[pair[0]] === "undefined") {
+			      query_string[pair[0]] = decodeURIComponent(pair[1]);
+			        // If second entry with this name
+			    } else if (typeof query_string[pair[0]] === "string") {
+			      var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+			      query_string[pair[0]] = arr;
+			        // If third or later entry with this name
+			    } else {
+			      query_string[pair[0]].push(decodeURIComponent(pair[1]));
+			    }
+			  } 
+			  return query_string;
+		}();
+
+		console.log(QueryString);
+
+		if(QueryString.hero == "manas"){
+			$('#eric')[0].src = "https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png";
+		}
+		if(QueryString.villain == "eric"){
+			$('#vilaoimg')[0].src = "https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png";
+		}
+
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+				height: $('.scene').height(),
+				width: $('.scene').width()	,
+				playerVars: {
+							autoplay: 0,
+							loop: 1,
+							controls: 0,
+							showinfo: 0,
+							autohide: 1,
+							modestbranding: 1,
+							vq: 'hd1080'},
+				videoId: '0eD4_zFt1c4',
+				events: {
+				}
+			});
+		}
+		function playvideo() {
+			player.playVideo();
+		}
+	    //youtube
+	    function change(e){
+	    	if(e.keyCode == '32'){
+	    		direction = !direction;
+	    	} else if(e.keyCode == '13'){
+	    		if (multiplier == 1){
+		    		setTimeout(function(){
+	    				multiplier = 10*multiplier;
+	    				if (multiplier > 10)
+	    					multiplier = 10;
+		    		},2000);
+		    	}
+	    	}
+	    }
+	    function shootdetector(e){
+	    	if (e.keyCode == '13'){
+	    		shoot(multiplier);
+	    		multiplier = 1;
+	    	}
+	    }
+	    function invertcolors(){
+	    	if (acidtrip) {
+		    	setTimeout(function(){
+		    		$("#eric").toggleClass("invert");
+		    		$(".villain").toggleClass("invert");
+		    		$(".tiro").toggleClass("invert");
+		    		invertcolors()
+		    	},200);
+		    }
+	    }
+	    function superscore(){
+	    	if (specialLevel){
+		    	setTimeout(function(){
+		    		score += 1;
+		    		superscore();
+		    	},500);
+	    	}
+	    }
+	    function updateEarth(){
+	    	earthbody.update({x:$earth.position().left,y:$earth.position().top});
+	    }
+	    console.log("%cLEVY!", "color: red; font-family: sans-serif; font-size: 30em; font-weight: bolder; text-shadow: #000 1px 1px;");
+	    function explode(){
+	    	$elie.hide();
+			$earth.hide();
+			$('.stars').hide();
+			$('.twinkling').hide();
+			for (j=0;j<enemies.length;j++){
+				enemies[j].div.hide();
+			}
+			enemies = [];
+			for (j=0;j<shoots.length;j++){
+				shoots[j].div.hide();
+			}
+			shoots = [];
+			stop = true;
+			if (!acidtrip){
+				var oImg = "<img class='explosao' src='./exploding_earth1.gif' />";
+				$('.scene').append(oImg);
+			}
+	    }
+	    function rotateearth(){
+	    	if (degree2 == 360 || degree2 == -360){
+	    		degree2 = 0;
+	    	}
+	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
+	    	timer = setTimeout(function() {
+	    		if(!specialLevel){
+	    			degree2 += 0.005;
+	    		} else {
+	    			degree2 += 8;
+	    		}
+	    		for (i=0; i<enemies.length; i++){
+	    			for (j=0; j<shoots.length; j++){
+	    				if (enemies[i].contact(shoots[j])){
+	    					gritar();
+	    					enemies[i].collide(shoots[j]);
+	    					document.getElementById(shoots[j].div[0].id).remove();
+	    					shoots.splice(j,1);
+	    					if (!enemies[i].acid){
+								$(enemies[i].div).find('img').attr("src","https://lh5.googleusercontent.com/-ybsaLXodIAk/V7ND4jj07hI/AAAAAAAAAVU/ivUhWXycGYcdkhtiwYv4pFIMwuWdVX93gCL0B/w80-h100-no/angrysales.png");
+							} else {
+								// Está ativando a acid trip
+								specialLevel = true;
+								special = "acid";
+								setTimeout(function(){
+									specialLevel = false;
+									acidtrip = false;
+									if (level == 1){
+										$("#cf2 img.1").toggleClass("transparent");
+										$("#cf2 img.2").toggleClass("transparent");
+										$(".stars").toggleClass("transparent");
+										$(".twinkling").toggleClass("transparent");
+									} else if (level == 2 ){
+										$("#cf2 img.2").toggleClass("transparent");
+										$('#player').removeClass('hidden');
+										player.playVideo();
+									}
+									$(".acid").toggleClass("transparent");
+								},10000); // Timer dos niveis especiais
+								if (!acidtrip){
+									$(".acid").toggleClass("transparent"); // Vai mostrar o bg sempre
+									if (level == 1){ //se estiver a Terra e estrelas ali
+										$("#cf2 img.1").toggleClass("transparent");
+										$("#cf2 img.2").toggleClass("transparent");
+										$(".stars").toggleClass("transparent");
+										$(".twinkling").toggleClass("transparent");
+									} else if (level == 2){ //senão só esconde o olho
+										$("#cf2 img.2").toggleClass("transparent");
+										$('#player').addClass('hidden');
+										player.stopVideo();
+									}
+								}
+								if (!acidtrip){
+									acidtrip = true;
+									invertcolors();
+									superscore();
+								}
+							}
+	    				}
+	    			}
+	    		};
+	    		for (i=0; i<enemies.length; i++){
+	    			enemies[i].move(1/60);
+	    			enemies[i].updateUI();
+	    		};
+	    		for (i=0; i<shoots.length; i++){
+	    			shoots[i].move(1/60);
+	    			shoots[i].updateUI();
+	    		};
+	    		for (i=0;i<enemies.length;i++){
+					var wd = $('.scene').width();
+					var ht = $('.scene').height();
+					if ( earthbody.contact(enemies[i]) && !enemies[i].acid ){
+						explode();
+						return;
+					}
+					if ( enemies[i].collided && (enemies[i].position.x < -enemies[i].width || enemies[i].position.x > wd || enemies[i].position.y < -enemies[i].height || enemies[i].position.y > ht )){
+						enemies[i].div.hide()
+						enemies.splice(i,1);
+						score += 20;
+						$('#minha-pontuacao-linda').html(score);
+						if (score == 100 && level < 3 ){
+							playvideo();
+							level ++;
+							setTimeout(function(){
+								$('#player').removeClass('hidden');
+							},1000);
+							var div = $('.levelup.template').clone();
+							div.removeClass('template');
+							$('.scene').append(div);
+							div.show();
+							$("#cf2 img.1").toggleClass("transparent");
+							$(".stars").toggleClass("transparent");
+							$(".twinkling").toggleClass("transparent");
+						}
+					}
+				};
+	    		rotateearth();
+	    	},(1/60));
+	    }
+	    function rotate(){
+	    	if (degree == 360 || degree == -360){
+	    		degree = 0;
+	    	}
+	    	if (degree < 0){
+	    		degree = 360 + degree;
+	    	}
+	       	$elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+	       	if (stop){
+	       		return;
+	       	}
+			timer = setTimeout(function() {
+				if(direction){
+					if (level < 3){
+	    				degree-=0.5; rotate();
+					} else {
+						degree-=1; rotate();
+					}
+				} else {
+					if (level < 3){
+						degree+=0.5; rotate();
+					} else {
+						degree+=1; rotate();
+					}
+				}
+			},1/120);
+	    }
+	    function shoot(multiplicador){
+	    	var shootdiv = document.createElement('div');
+	    	shootdiv.id = id;
+	    	shootdiv.className = 'tiro';
+	    	document.getElementsByTagName('body')[0].appendChild(shootdiv);
+	    	$divshoot = $("#"+id);
+	    	id ++;
+	    	$divshoot.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+	    	x = Math.cos(degree*Math.PI/180);
+	    	y = Math.sin(degree*Math.PI/180);
+	    	var speed = { x: x*500, y: y*500 };
+	    	var pos = { x: $earth.position().left+80*Math.cos(degree*Math.PI/180), y: $earth.position().top+80*Math.sin(degree*Math.PI/180) };
+	    	//var pos = { x: $earth.position().left, y: $earth.position().top };
+	    	tiro = new ElasticBody($divshoot, pos, speed, 50, 5, multiplicador, false);
+	    	tiro.hitpolygon.angle = degree;
+	    	shoots.push(tiro);
+	    	if ( shoots.length > 10 ) {
+	    		shoots.shift();
+	    	}
+	    	if (id > 10 && document.getElementById(String(id-10))) {
+	    		document.getElementById(String(id-10)).remove();
+	    	}
+	    }
+	    $(document).ready(start)
+	</script>
+</html>

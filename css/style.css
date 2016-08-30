@@ -2,6 +2,30 @@ body, html{
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
+
+.title{
+	top: 50%;
+	left: 50%;
+	margin: auto;
+	text-align: center;
+	color: white;
+	font-family: sans-serif;
+}
+
+.start{
+	top: 50%;
+	left: 50%;
+	text-align: center;
+	color: white !important;
+	text-decoration: none !important;
+	font-family: sans-serif;
+}
+
+a{
+	color: white !important;
+	text-decoration: none !important;
+}
+
 #terra{
 	width: 150px;
 	height: 150px;
