@@ -3,6 +3,49 @@ body, html{
 	overflow-y: hidden;
 }
 
+.start{
+	cursor: pointer;
+	font-size: 10rem;
+	font-weight: 800pt;
+}
+
+.selector{
+	color: white;
+	cursor: pointer;
+	display: table;
+	margin: 0 auto;
+	right: 0;
+	left: 0;
+}
+
+.selected{
+	-webkit-filter: drop-shadow(10px 10px 10px rgba(30, 180, 240, 0.5))
+					drop-shadow(-10px -10px 10px rgba(30, 180, 240, 0.5))
+					drop-shadow(-10px 10px 10px rgba(30, 180, 240, 0.5))
+					drop-shadow(10px -10px 10px rgba(30, 180, 240, 0.5))
+}
+
+.selected-vilao{
+	-webkit-filter: drop-shadow(10px 10px 10px rgba(240, 10, 10, 0.5))
+					drop-shadow(-10px -10px 10px rgba(240, 10, 10, 0.5))
+					drop-shadow(-10px 10px 10px rgba(240, 10, 10, 0.5))
+					drop-shadow(10px -10px 10px rgba(240, 10, 10, 0.5))
+}
+
+.selector > div {
+	float: left;
+}
+
+.selector > div > img {
+	width: 100px;
+	height: 120px;
+	position: relative !important;
+	margin-left: 30px !important;
+	top: 0 !important;
+	left: 0 !important;
+	z-index: 10;
+}
+
 .title{
 	top: 50%;
 	left: 50%;
