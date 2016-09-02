@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -145,6 +146,11 @@
 		    		invertcolors()
 		    	},200);
 		    }
+		    if (!acidtrip){
+		    	if ($('#eric').hasClass("invert")){
+		    		$("#eric").toggleClass("invert");
+		    	}
+		    }
 	    }
 	    function superscore(){
 	    	if (specialLevel){
@@ -172,7 +178,7 @@
 			}
 			shoots = [];
 			stop = true;
-			if (!acidtrip){
+			if (!acidtrip && !(level == 2)) {
 				var oImg = "<img class='explosao' src='./exploding_earth1.gif' />";
 				$('.scene').append(oImg);
 			}
@@ -260,7 +266,7 @@
 						enemies.splice(i,1);
 						score += 20;
 						$('#minha-pontuacao-linda').html(score);
-						if (score == 100 && level < 3 ){
+						if (score == 2000 && level < 3 ){
 							playvideo();
 							level ++;
 							setTimeout(function(){

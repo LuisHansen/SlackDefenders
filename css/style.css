@@ -277,7 +277,7 @@ a{
 	font-weight: 900pt;
 	z-index: 10;
 	animation-name: levelrise;
-	animation-duration: 1.5s;
+	animation-duration: 2s;
 	opacity: 0;
 }
 

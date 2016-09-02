@@ -111,7 +111,7 @@ function generateEnemy() {
 	var earth = $('.terradiv');
 	var scene = $('.scene');
 	random = Math.random();
-	if (random <= 0.2 ){
+	if (random <= 0.02 ){
 		if (!acidtrip){
 			acid = true;
 		}
