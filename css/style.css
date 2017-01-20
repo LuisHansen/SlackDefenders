@@ -22,13 +22,52 @@ body, html{
 				drop-shadow(10px -10px 10px rgba(30, 180, 240, 0.5))
 }
 
-.selector{
+.selector > .character {
 	color: white;
 	cursor: pointer;
 	display: table;
 	margin: 0 auto;
 	right: 0;
 	left: 0;
+}
+
+.selectors {
+	width: 100%;
+	height: 500px;
+}
+
+.selector {
+	width: 50%;
+	height: 500px;
+	float: left;
+}
+
+.selector > .title {
+	width: 100%;
+	margin: 20px;
+	margin-bottom: 50px;
+}
+
+#manas > img {
+	-webkit-transform: rotate(-17deg);
+    margin-right: -8px;
+}
+
+#ericseletor > img {
+	-webkit-transform: rotate(-11deg);
+    width: 150px;
+    height: 180px;
+    margin-top: -31px;
+}
+
+#nakajo > img {
+    -webkit-transform: scaleX(-1) rotate(-2deg);
+    margin-left: -10px;
+}
+
+.characters {
+	display: block;
+	margin: auto;
 }
 
 .selected{
