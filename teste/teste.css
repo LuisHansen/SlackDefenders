@@ -1,5 +1,6 @@
 body {
 	background: black;
+	overflow: hidden;
 }
 
 .background {
@@ -12,11 +13,8 @@ body {
 }
 
 .planeta {
-	width: 100px;
-	height: 100px;
-	background: #b72d2d;
-	z-index: -1000;
-	border-radius: 50px;
+	z-index: -998;
+	position: absolute;
 }
 
 /*.planeta::after {

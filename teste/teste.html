@@ -5,7 +5,13 @@
 		<script src="teste.js"></script>
 		<link rel="stylesheet" type="text/css" href="teste.css">
 	</head>
-	<body>
+	<svg width="100%" height="100%" viewBox="0 0 450 100" style="position: absolute; top: 0;">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+      </filter>
+    </defs>
+	<body filter="url(#blur)">
 		<div class="planeta template"></div>
 		<div class="estrela grande template"></div>
 		<div class="estrela pequena template"></div>
