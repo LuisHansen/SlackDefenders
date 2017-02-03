@@ -4,24 +4,27 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet">
+		<link href="/css/DISTGRG_-webfont.woff" rel="stylesheet">
 		<script src="./js/menu.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	</head>
 	<body bgcolor="#000000">
-		<div class="title"><h3>Slack Defend</h3></div>
+		<div class="title">&ltSlack Defenders&gt</div>
 		<div class="selectors">
-			<div class="selector">
-				<div class="title">Escolha o herói:</div>
+			<div class="novoselector">
+				<div class="title blue">@</div><div class="novotitle">Escolha o herói:</div>
 				<div class="characters">
-				<div class="character" id="manas" onclick="manas()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png" alt="Manas"></div>
-				<div class="character selected" id="ericseletor" onclick="eric()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png" alt="Eric"></div>
-				<div class="character" id="nakajo" onclick="nakajo()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png" alt="Nakajo"></div>
+					<div class="character" id="manas" onclick="manas()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png" alt="Manas"></div>
+					<div class="character selected" id="ericseletor" onclick="eric()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png" alt="Eric"></div>
+					<div class="character" id="nakajo" onclick="nakajo()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png" alt="Nakajo"></div>
 				</div>
 			</div>
-			<div class="selector">
-				<div class="title">Escolha o vilão:</div>
-				<div id="sales" onclick="sales()" class="selected-vilao"><img src="https://emoji.slack-edge.com/T0NGK4FPS/salles/eefac6cd78a94882.png" alt="Sales"></div>
-				<div id="roma" onclick="roma()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/roma/69e76a7cf0bacf90.png" alt="Roma"></div>
+			<div class="novoselector">
+				<div class="title red">*</div><div class="novotitle">Escolha o vilão:</div>
+				<div class="characters">
+					<div class="character selected-vilao" id="sales" onclick="sales()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/salles/eefac6cd78a94882.png" alt="Sales"></div>
+					<div class="character" id="roma" onclick="roma()"><img src="https://emoji.slack-edge.com/T0NGK4FPS/roma/69e76a7cf0bacf90.png" alt="Roma"></div>
+				</div>
 			</div>
 		</div>
 		<div class="start" onclick="play()">PLAY!</div>

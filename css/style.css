@@ -3,6 +3,20 @@ body, html{
 	overflow-y: hidden;
 }
 
+.novoselector {
+	color: white;
+	width: 50%;
+	height: 50%;
+	float: left;
+	margin: auto;
+}
+
+.novotitle {
+	margin: auto;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
 .start{
 	cursor: pointer;
 	font-size: 30pt;
@@ -11,25 +25,28 @@ body, html{
 	font-family: 'Coming Soon', cursive;
 }
 
+.characters {
+	display: inline-flex;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+
+.character {
+	margin: 0 auto;
+}
+
 *{
 	font-family: 'Coming Soon', cursive !important;
 }
 
 .start:hover{
 	-webkit-filter: drop-shadow(10px 10px 10px rgba(30, 180, 240, 0.5))
-				drop-shadow(-10px -10px 10px rgba(30, 180, 240, 0.5))
-				drop-shadow(-10px 10px 10px rgba(30, 180, 240, 0.5))
-				drop-shadow(10px -10px 10px rgba(30, 180, 240, 0.5))
+					drop-shadow(-10px -10px 10px rgba(30, 180, 240, 0.5))
+					drop-shadow(-10px 10px 10px rgba(30, 180, 240, 0.5))
+					drop-shadow(10px -10px 10px rgba(30, 180, 240, 0.5))
 }
 
-.selector > .character {
-	color: white;
-	cursor: pointer;
-	display: table;
-	margin: 0 auto;
-	right: 0;
-	left: 0;
-}
 
 .selectors {
 	width: 100%;
@@ -65,11 +82,6 @@ body, html{
     margin-left: -10px;
 }
 
-.characters {
-	display: block;
-	margin: auto;
-}
-
 .selected{
 	-webkit-filter: drop-shadow(10px 10px 10px rgba(30, 180, 240, 0.5))
 					drop-shadow(-10px -10px 10px rgba(30, 180, 240, 0.5))
@@ -98,13 +110,33 @@ body, html{
 	z-index: 10;
 }
 
+@font-face {
+    font-family: 'distant_galaxyregular';
+    src: url('./DISTGRG_-webfont.woff') format('woff'),
+         url('./DISTGRG_-webfont.svg#distant_galaxyregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 .title{
 	top: 50%;
 	left: 50%;
 	margin: auto;
 	text-align: center;
-	color: white;
-	font-family: sans-serif;
+	color: yellow;
+	font-family: distant_galaxyregular !important;
+	font-size: 5rem;
+	margin-bottom: 20px;
+	letter-spacing: -5px;
+}
+
+.blue {
+	color: rgb(30, 180, 240) !important;
+}
+
+.red {
+	color: rgb(206, 0, 0) !important;
 }
 
 .start{

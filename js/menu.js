@@ -30,28 +30,37 @@ function eric (){
 	return;
 }
 
+function customHero (){
+	hero = 'hero=custom';
+	return;
+}
+
 function sales () {
 	villain = 'villain=sales';
 	$('#sales').addClass('selected-vilao');
 	$('#roma').removeClass('selected-vilao');
+	return;
 }
 
 function roma () {
 	villain = 'villain=roma';
 	$('#roma').addClass('selected-vilao');
 	$('#sales').removeClass('selected-vilao');
+	return;
 }
 
 function previewFile() {
-  var preview = document.getElementById('outImage');
-  var file    = document.querySelector('input[type=file]').files[0];
-  var reader  = new FileReader();
+	var preview = document.getElementById('outImage');
+	var file    = document.querySelector('input[type=file]').files[0];
+	var reader  = new FileReader();
+		reader.addEventListener("load", function () {
+		preview.src = reader.result;
+	}, false);
 
-  reader.addEventListener("load", function () {
-    preview.src = reader.result;
-  }, false);
+	if (file) {
+		reader.readAsDataURL(file);
+	}
 
-  if (file) {
-    reader.readAsDataURL(file);
-  }
+	$('#outImage').addClass('selected');
+	customHero();
 }
