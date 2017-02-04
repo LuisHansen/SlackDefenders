@@ -8,6 +8,7 @@ Basta abrir o index.html para visualizar.
 Alpha 1 - jogável, com bugs, faltam muitas coisas.
 
 TO DO:
+- Versão mobile usando Cordova - https://cordova.apache.org/docs/en/latest/guide/overview/ ;
 - Loja do Sr. Boucinhas;
 - Fazer o modo 1927 (clássico e preto e branco);
 - Fazer o modo MLG (pe pe pewww);
