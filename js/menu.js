@@ -1,6 +1,6 @@
 var hero = 'hero=eric';
 var villain = 'villain=sales';
-var link = "./jogo.html?"
+var link = "./intro.html?"
 
 function play (){
 	window.location = link + hero + "&" + villain;

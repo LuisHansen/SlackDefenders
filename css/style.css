@@ -3,6 +3,10 @@ body, html{
 	overflow-y: hidden;
 }
 
+body {
+	background: #000 url(../bg-intro.gif);
+}
+
 .novoselector {
 	color: white;
 	width: 50%;
@@ -322,10 +326,13 @@ a{
 	height: 100%;
 }
 
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+
 .titulo{
 	position: relative;
 	text-align: left;
-	font-family: sans-serif;
+	font-family: "Droid Sans", arial, verdana, sans-serif !important;
 	color: #ffffff;
 	z-index: 10;
 	width: 300px;
@@ -337,7 +344,7 @@ a{
 	float: left;
 	color: white;
 	text-align: center;
-	font-family: sans-serif;
+	font-family: "Droid Sans", arial, verdana, sans-serif !important;
 	margin: 30px;
 	margin-top: 10px;
 	z-index: 10;
@@ -357,7 +364,7 @@ a{
 	margin-left: -45px;
 	top: 20%;
 	left: 50%;
-	font-family: sans-serif;
+	font-family: "Droid Sans", arial, verdana, sans-serif !important;
 	font-weight: 900pt;
 	z-index: 10;
 	animation-name: levelrise;
