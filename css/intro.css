@@ -30,6 +30,10 @@ body, html
 	overflow: hidden;
 }
 
+body {
+	background: #000 url(../bg-intro.gif);
+}
+
 .maior {
     -webkit-transform:scale(1,1.5); /* Safari and Chrome */
     -moz-transform:scale(1,1.5); /* Firefox */
@@ -97,20 +101,20 @@ h1
 	font-family: distant_galaxyregular !important;
 	width: 100%;
 	top: 30%;
-	font-size: 6rem;
+	font-size: 15rem;
 	line-height: 0.8em;
 	letter-spacing: -0.06em;
 	text-align: center;
 	color: #000;
-	text-shadow: -2px -2px 0 #ff6, 2px -2px 0 #ff6, -2px 2px 0 #ff6, 2px 2px 0 #ff6;
+	text-shadow: -5px -5px 0 #FFDD29, 5px -5px 0 #FFDD29, -5px 5px 0 #FFDD29, 5px 5px 0 #FFDD29;
 	opacity: 0;
 	z-index: 1;
-	font-weight: 400 !important;
-	-webkit-animation: logo 10s ease-out 5.5s;
-	-moz-animation: logo 10s ease-out 5.5s;
-	-ms-animation: logo 10s ease-out 5.5s;
-	-o-animation: logo 10s ease-out 5.5s;
-	animation: logo 10s ease-out 5.5s;
+	font-weight: 300 !important;
+	-webkit-animation: logo 12s ease-out 5.5s;
+	-moz-animation: logo 12s ease-out 5.5s;
+	-ms-animation: logo 12s ease-out 5.5s;
+	-o-animation: logo 12s ease-out 5.5s;
+	animation: logo 12s ease-out 5.5s;
 }
 
 h1 sub
@@ -122,8 +126,9 @@ h1 sub
 }
 
 @-webkit-keyframes logo {
-	0% { -webkit-transform: scale(1); opacity: 1; }
+	0% { -webkit-transform: scale(1.2); opacity: 1; }
 	50% { opacity: 1; }
+	80% { opacity: 0; }
 	100% { -webkit-transform: scale(0.1); opacity: 0; }
 }
 
@@ -160,8 +165,9 @@ h1 sub
 	bottom: 0;
 	left: 50%;
 	margin-left: -9em;
-	font-size: 350%;
+	font-size: 450%;
 	text-align: justify;
+	color: #FFDD29 !important;
 	overflow: hidden;
 	-webkit-transform-origin: 50% 100%;
 	-moz-transform-origin: 50% 100%;
@@ -194,7 +200,7 @@ h1 sub
 #titles p
 {
 	text-align: justify;
-	margin: 0.8em 0;
+	margin: 0.6em 0;
 }
 
 #titles p.center
@@ -204,7 +210,7 @@ h1 sub
 
 #titles a
 {
-	color: #ff6;
+	color: #FFDD29;
 	text-decoration: underline;
 }
 
@@ -212,11 +218,11 @@ h1 sub
 {
 	position: absolute;
 	top: 100%;
-	-webkit-animation: scroll 100s linear 10s infinite;
-	-moz-animation: scroll 100s linear 10s infinite;
-	-ms-animation: scroll 100s linear 10s infinite;
-	-o-animation: scroll 100s linear 10s infinite;
-	animation: scroll 100s linear 10s infinite;
+	-webkit-animation: scroll 100s linear 14s infinite;
+	-moz-animation: scroll 100s linear 14s infinite;
+	-ms-animation: scroll 100s linear 14s infinite;
+	-o-animation: scroll 100s linear 14s infinite;
+	animation: scroll 100s linear 14s infinite;
 }
 
 /* animation */
