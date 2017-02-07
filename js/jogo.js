@@ -211,12 +211,3 @@ function generateEnemy() {
 		return enemy = new ElasticBody(div, position, speed, size.width+10, size.height+10, 10, true);
 	}
 }
-
-function gritar() {
-	var audio = new Audio();
-	audio.src = "audio.wav";
-	audio.play();
-	setTimeout(function() {
-		audio.pause();
-	}, 750);
-}
