@@ -1,11 +1,11 @@
 ATENÇÃO: não use em caso de histórico de epilepsia ou convulções.
 
-# simulador-de-colisao
+# Slack Defenders
 
-Simulador de colisão usando carinhas do Slack.
-Basta abrir o index.html para visualizar.
+Joguinho simples usando emojis do Slack e JavaScript.
+Pode testar aqui: <a href="https://luishansen.github.io/SlackDefenders/">SlackDefenders</a>
 
-Alpha 1 - jogável, com bugs, faltam muitas coisas.
+Beta 1 - Alguns bugs ainda existem, mas já é uma experiência sólida para browsers.
 
 TO DO:
 - Loja do Sr. Boucinhas;
