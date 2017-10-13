@@ -7,4 +7,4 @@ setTimeout( () => {
 
 setTimeout( () => {
 	window.location = "./jogo.html?" + query;
-}, 50000 );
+}, 75000 );
