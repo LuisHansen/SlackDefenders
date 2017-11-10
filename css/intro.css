@@ -218,11 +218,11 @@ h1 sub
 {
 	position: absolute;
 	top: 100%;
-	-webkit-animation: scroll 100s linear 14s infinite;
-	-moz-animation: scroll 100s linear 14s infinite;
-	-ms-animation: scroll 100s linear 14s infinite;
-	-o-animation: scroll 100s linear 14s infinite;
-	animation: scroll 100s linear 14s infinite;
+	-webkit-animation: scroll 150s linear 14s infinite;
+	-moz-animation: scroll 150s linear 14s infinite;
+	-ms-animation: scroll 150s linear 14s infinite;
+	-o-animation: scroll 150s linear 14s infinite;
+	animation: scroll 150s linear 14s infinite;
 }
 
 /* animation */
