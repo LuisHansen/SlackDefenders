@@ -75,9 +75,9 @@ body {
 }
 
 #ericseletor > img {
-	-webkit-transform: rotate(-11deg);
-    width: 150px;
-    height: 180px;
+	-webkit-transform: rotate(180deg);
+    width: 188px;
+    height: 102px;
     margin-top: -31px;
 }
 
@@ -169,14 +169,14 @@ a{
 }
 
 #eric{
-	width: 25px;
-	height: 32px;
-	position: absolute;
-	margin-top: -12.5px;
-	margin-left: 85px;
-	top: 50%;
-	left: 50%;
-	z-index: 10;
+    height: 32px;
+    position: absolute;
+    margin-top: -12.5px;
+    margin-left: 68px;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    -webkit-transform: rotate(264deg);
 }
 
 .image1{
@@ -201,10 +201,9 @@ a{
 	top: 50%;
 	left: 50%;
 	width: 50px;
-	height: 5px;
 	transform-origin: 0% 50%;
-	color: red;
-	background-color: red;
+/*	color: red;
+	background-color: red;*/
 }
 
 .sales{
@@ -302,7 +301,7 @@ a{
 }
 
 .villain img {
-	width: 100%;
+	/*width: 100%;*/
 	height: 100%;
 }
 
