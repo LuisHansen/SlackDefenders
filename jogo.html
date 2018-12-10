@@ -21,14 +21,14 @@
 			<div class="terradiv shadow" id="cf2">
 				<img class="3" id="terra" src="./hypno.png"/>
 				<img class="2" id="terra" src="./eye-026.png"/>
-				<img class="1" id="terra" src="./Earth-Free-Download-PNG.png"/>
+				<img class="1" id="terra" src="earth.png"/>
 			</div> 
 			<div class="image1">
 				<img id="eric" src="https://emoji.slack-edge.com/T0NGK4FPS/eric/8a5698b1bd5ce9be.png"/>
 			</div>
 		</div>
 		<div class="villain template">
-			<img id="vilaoimg" src="https://emoji.slack-edge.com/T0NGK4FPS/salles/eefac6cd78a94882.png" />
+			<img id="vilaoimg" src="vilao.png" />
 		</div>
 		<div class="smiley template">
 			<img src="./smiley.png" />
@@ -36,6 +36,7 @@
 	</body>
 
 	<script>
+        var audio = new Audio('./pink.mp3');
 		window.addEventListener("keydown", change, false);
 		window.addEventListener("keyup", shootdetector, false);
 	    var $elie = $('.image1');
@@ -57,6 +58,8 @@
 	    var special = "";
 	    var vilao = "sales";
 	    var CREEPYSCORE = 2000;
+	    var CONTROLES_INVERTIDOS = true;
+
 		var QueryString = function () {
 			  var query_string = {};
 			  var query = window.location.search.substring(1);
@@ -82,16 +85,21 @@
 			$('#eric')[0].src = "https://emoji.slack-edge.com/T0NGK4FPS/manas/61d334f422c2c01d.png";
 		} else if (QueryString.hero == "nakajo"){
 			$('#eric')[0].src = "https://emoji.slack-edge.com/T0NGK4FPS/nakajo/a48bf7355ff2519b.png"
-		} // Eric é o padrão
+		} else {
+			$('#eric')[0].src = "bender.png"
+		}// Eric é o padrão
 
 		if(QueryString.villain == "roma"){
 			$('#vilaoimg')[0].src = "https://emoji.slack-edge.com/T0NGK4FPS/roma/69e76a7cf0bacf90.png";
 			vilao = "roma";
 		} // Sales é o padrão
 	    function change(e){
-	    	if(e.keyCode == '32'){
+	    	if (audio.paused){
+	    		audio.play();
+	    	}
+	    	if(e.keyCode == (CONTROLES_INVERTIDOS ? '32' : '13')){
 	    		direction = !direction;
-	    	} else if(e.keyCode == '13'){
+	    	} else if(e.keyCode == (CONTROLES_INVERTIDOS ? '13' : '32')){
 	    		if (multiplier == 1){
 		    		setTimeout(function(){
 	    				multiplier = 10*multiplier;
@@ -102,7 +110,7 @@
 	    	}
 	    }
 	    function shootdetector(e){
-	    	if (e.keyCode == '13'){
+	    	if (e.keyCode == (CONTROLES_INVERTIDOS ? '13' : '32')){
 	    		shoot(multiplier);
 	    		multiplier = 1;
 	    	}
@@ -133,7 +141,7 @@
 	    function updateEarth(){
 	    	earthbody.update({x:$earth.position().left,y:$earth.position().top});
 	    }
-	    console.log("%cLEVY!", "color: red; font-family: sans-serif; font-size: 30em; font-weight: bolder; text-shadow: #000 1px 1px;");
+	    console.log("%cLEVY!", "color: red; font-family: sans-serif; font-size: 30em; font-weight: bolder; text-shadow: #000 2px 2px;");
 	    function explode(){
 	    	$elie.hide();
 			$earth.hide();
@@ -153,9 +161,37 @@
 				$('.scene').append(oImg);
 			}
 	    }
+	    function dialog(text){
+	    	score+=20;
+	    	var kid = "<div class='levelup'>"+text+"</div>";
+	    	$('.scene').append(kid);
+	    	setTimeout(()=> {
+	    		$('.dialog').remove();
+	    	},5000)
+	    }
+
 	    function rotateearth(){
 	    	if (degree2 == 360 || degree2 == -360){
 	    		degree2 = 0;
+	    	}
+	    	if (score === 140){
+    			dialog("Você acha que está no controle?");
+	    	}
+	    	if (score === 500){
+    			dialog("Ninguém está no controle!");
+	    	}
+	    	if (score === 700){
+    			dialog("Tente controlar agora!");
+    			CONTROLES_INVERTIDOS = !CONTROLES_INVERTIDOS;
+	    	}
+	    	if (score === 1000){
+    			dialog("Prepare-se...");
+	    	}
+	    	if (score === 1200){
+    			dialog("Adeus");
+    			setTimeout(()=>{
+    				window.location='./pacman.html';
+    			},3000)
 	    	}
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
@@ -272,9 +308,10 @@
 			},1/120);
 	    }
 	    function shoot(multiplicador){
-	    	var shootdiv = document.createElement('div');
+	    	var shootdiv = document.createElement('img');
 	    	shootdiv.id = id;
 	    	shootdiv.className = 'tiro';
+	    	shootdiv.src='cigarro.png'
 	    	document.getElementsByTagName('body')[0].appendChild(shootdiv);
 	    	$divshoot = $("#"+id);
 	    	id ++;
