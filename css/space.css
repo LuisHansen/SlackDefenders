@@ -1,0 +1,42 @@
+.levelup{
+  color: red;
+  position: absolute;
+  margin-left: -45px;
+  top: 20%;
+  left: 50%;
+  font-family: "Droid Sans", arial, verdana, sans-serif !important;
+  font-weight: 900;
+  z-index: 10;
+  animation-name: levelrise;
+  animation-duration: 10s;
+  opacity: 0;
+}
+
+@keyframes levelrise{
+  from {transform: scale(1);
+      opacity: 1;}
+  to {transform: scale(5);
+    opacity: 0;}
+}
+
+body, html{
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  position :absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast
+}

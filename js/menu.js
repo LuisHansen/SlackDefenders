@@ -1,9 +1,9 @@
 var hero = 'hero=eric';
 var villain = 'villain=sales';
-var link = "./intro.html?"
+var link = "./jogo.html"
 
 function play (){
-	window.location = link + hero + "&" + villain;
+	window.location = link;
 }
 
 function manas (){

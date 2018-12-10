@@ -57,6 +57,8 @@
 	    var special = "";
 	    var vilao = "sales";
 	    var CREEPYSCORE = 2000;
+	    var CONTROLES_INVERTIDOS = true;
+
 		var QueryString = function () {
 			  var query_string = {};
 			  var query = window.location.search.substring(1);
@@ -91,9 +93,9 @@
 			vilao = "roma";
 		} // Sales é o padrão
 	    function change(e){
-	    	if(e.keyCode == '32'){
+	    	if(e.keyCode == (CONTROLES_INVERTIDOS ? '32' : '13')){
 	    		direction = !direction;
-	    	} else if(e.keyCode == '13'){
+	    	} else if(e.keyCode == (CONTROLES_INVERTIDOS ? '13' : '32')){
 	    		if (multiplier == 1){
 		    		setTimeout(function(){
 	    				multiplier = 10*multiplier;
@@ -104,7 +106,7 @@
 	    	}
 	    }
 	    function shootdetector(e){
-	    	if (e.keyCode == '13'){
+	    	if (e.keyCode == (CONTROLES_INVERTIDOS ? '13' : '32')){
 	    		shoot(multiplier);
 	    		multiplier = 1;
 	    	}
@@ -155,9 +157,37 @@
 				$('.scene').append(oImg);
 			}
 	    }
+	    function dialog(text){
+	    	score+=20;
+	    	var kid = "<div class='levelup'>"+text+"</div>";
+	    	$('.scene').append(kid);
+	    	setTimeout(()=> {
+	    		$('.dialog').remove();
+	    	},5000)
+	    }
+
 	    function rotateearth(){
 	    	if (degree2 == 360 || degree2 == -360){
 	    		degree2 = 0;
+	    	}
+	    	if (score === 140){
+    			dialog("Você acha que está no controle?");
+	    	}
+	    	if (score === 500){
+    			dialog("Ninguém está no controle!");
+	    	}
+	    	if (score === 700){
+    			dialog("Tente controlar agora!");
+    			CONTROLES_INVERTIDOS = !CONTROLES_INVERTIDOS;
+	    	}
+	    	if (score === 1000){
+    			dialog("Prepare-se...");
+	    	}
+	    	if (score === 1200){
+    			dialog("Adeus");
+    			setTimeout(()=>{
+    				window.location='./pacman.html';
+    			},3000)
 	    	}
 	    	$earth.css({ WebkitTransform: 'rotate(' + degree2 + 'deg)'});
 	    	timer = setTimeout(function() {
