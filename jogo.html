@@ -36,6 +36,7 @@
 	</body>
 
 	<script>
+        var audio = new Audio('./pink.mp3');
 		window.addEventListener("keydown", change, false);
 		window.addEventListener("keyup", shootdetector, false);
 	    var $elie = $('.image1');
@@ -93,6 +94,9 @@
 			vilao = "roma";
 		} // Sales é o padrão
 	    function change(e){
+	    	if (audio.paused){
+	    		audio.play();
+	    	}
 	    	if(e.keyCode == (CONTROLES_INVERTIDOS ? '32' : '13')){
 	    		direction = !direction;
 	    	} else if(e.keyCode == (CONTROLES_INVERTIDOS ? '13' : '32')){
@@ -202,7 +206,7 @@
 	    					enemies[i].collide(shoots[j]);
 	    					// console.log(enemies[i].div[0].childNodes);
 	    					enemies[i].div[0].childNodes[1].src='vilao_pos.png';
-	    					document.getElementById(shoots[j].div[0].id).remove();
+	    					if (document.getElementById(shoots[j].div[0].id)) { document.getElementById(shoots[j].div[0].id).remove();}
 	    					shoots.splice(j,1);
 	    					if (enemies[i].acid){
 								// Está ativando a acid trip

@@ -1147,7 +1147,8 @@ var PACMAN = (function () {
     function loaded() {
 
         dialog("Press N to Start");
-        
+        var audio = new Audio('./guile.mp3');
+		audio.play();
         document.addEventListener("keydown", keyDown, true);
         document.addEventListener("keypress", keyPress, true); 
         

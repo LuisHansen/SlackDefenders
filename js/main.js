@@ -15,7 +15,7 @@
    limitations under the License.
 */
 
-var debugmode = true;
+var debugmode = false;
 
 var states = Object.freeze({
    SplashScreen: 0,
@@ -241,8 +241,8 @@ function gameloop() {
       {
          playerDead();
          //no! we touched the pipe
-         if (score >= 5) {
-            score -= 1;
+         if (score >= 12) {
+            score += 1;
             dialog("HAHAHAHA");
             setTimeout(()=>{
                dialog("SAIA DAQUI!");

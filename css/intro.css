@@ -160,12 +160,12 @@ h1 sub
 #titles
 {
 	position: absolute;
-	width: 18em;
+	width: 15em;
 	height: 50em;
 	bottom: 0;
 	left: 50%;
-	margin-left: -9em;
-	font-size: 450%;
+	margin-left: -7.5em;
+	font-size: 500%;
 	text-align: justify;
 	color: #FFDD29 !important;
 	overflow: hidden;
@@ -178,7 +178,8 @@ h1 sub
 	-moz-transform: perspective(300px) rotateX(25deg);
 	-ms-transform: perspective(300px) rotateX(25deg);
 	-o-transform: perspective(300px) rotateX(25deg);
-	transform: perspective(300px) rotateX(25deg);
+	transform: perspective(330px) rotateX(24deg);
+	word-spacing: 15;
 }
 
 #titles:after
